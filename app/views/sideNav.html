@@ -1,0 +1,86 @@
+﻿<div class="overlay overlayInactive"></div>
+<!--Side Nav-->
+<div class="col-xs-6 col-sm-3 navbar sidebar-offcanvas sidebar" id="sidebar" role="navigation">
+    <div class="menu-icon">
+        <span class="navLeft pull-left">
+            <a class="btn-sm btn-primary btn-menu" data-toggle="offcanvas"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+        </span>
+        <span class="dataCenterNo pull-left"><ph-no phone-number="vm.beaconNumber"></ph-no></span>
+    </div>
+    <!--<div class="logo"><img src="images/Logo.png" /></div>-->
+
+
+    <div class="list-group row sidenavlist">
+        <a id="aSettings" ui-sref=".settings" class="list-group-item text-center btn-settings" ui-sref-active="active"><i class="fa fa-cog"></i> <!--<span translate>activerecord.models.setting.other</span>--></a>
+        <a id="aHome" ui-sref=".dashboard" class="list-group-item text-center" ui-sref-active="active"><i class="fa fa-home"></i> <span translate>v2.menu.home</span></a>
+        <a id="aNewIncident" ui-sref=".newIncident" class="list-group-item btnNewIncident text-center" ui-sref-active="active"><!--<i class="fa fa-warning"></i>--><img src="images/iconWarningWhite.svg" /> <span translate>views.incident.new</span></a>
+        <a id="aResources" ui-sref=".resources({id:0})" class="list-group-item btnResource text-center" ui-sref-active="active"><img src="images/iconAmbulanceWhite.svg" /> <span translate>v2.menu.resources</span></a>
+        <a id="aIncidents" ui-sref=".incidents" class="list-group-item btnIncidentList text-center" ui-sref-active="active"><img src="images/iconListWhite.svg" /><!--<i class="fa fa-list"></i>--> <span class="badge">{{vm.incidentsCount}}</span> <span translate>activerecord.models.incident.other</span></a>
+        <a id="aScanner" ui-sref=".scanner" class="list-group-item btnScanner text-center" ui-sref-active="active"><img src="images/iconScannerWhite.svg" /><!--<i class="fa fa-wifi"></i> --><span translate>v2.menu.scanner</span></a>
+        
+        <span class="clearfix spacer"></span>
+    </div>
+</div>
+<!--/Side Nav-->
+
+<script type="text/javascript">
+    function mySetupFunction() {
+        // stuff here.
+        var width = $(window).width();
+        $('[data-toggle="offcanvas"], div.overlay, .sidenavlist a').off('click');
+        $('[data-toggle="offcanvas"]').off('click');
+        if (width < 768) {
+            $('[data-toggle="offcanvas"], div.overlay, .sidenavlist a').click(function () {
+                $('.row-offcanvas').toggleClass('active');
+                $('.dataCenterNo').find('ph-no').toggleClass("hide-on-sm");
+                $('.overlay').toggleClass('overlayInactive');
+            })
+        } else {
+            $('[data-toggle="offcanvas"]').click(function () {
+                $('.row-offcanvas').toggleClass('active');
+                $('.overlay').toggleClass('overlayInactive');
+            })
+        }
+    }
+
+    $(document).ready(function () {
+        $('.topSubNavContainer').click(function () {
+            $('.row-offcanvas').removeClass('active');
+            $('.dataCenterNo').find('ph-no').removeClass("hide-on-sm");
+            $('.overlay').addClass('overlayInactive');
+        });
+        mySetupFunction();
+        $(window).on('resize', mySetupFunction);
+    });
+   
+
+    //$(document).ready(function () {
+
+    //    var width = $(window).width();
+    //        $('[data-toggle="offcanvas"], a, div.overlay').click(function () {
+    //            if (width < 768) {
+    //                alert('< 768');
+    //                $('.row-offcanvas').toggleClass('active');
+    //                $('.overlay').toggleClass('overlayInactive');
+    //                //$('.dataCenterNo').toggleClass('hideOn480');
+    //            } else {
+    //                alert('> 768');
+    //                $('.row-offcanvas').toggleClass('active');
+    //                $('.overlay').toggleClass('overlayInactive');
+    //                //$('.dataCenterNo').toggleClass('hideOn480');
+    //            }
+    //        });
+    //        //$('[data-toggle="offcanvas"], a, div.overlay').click(function () {
+    //        //    if ($('.sidebar-offcanvas').css('background-color') === 'rgb(82, 82, 82)') {
+    //        //        $('.list-group-item').attr('tabindex', '-1');
+    //        //        //$('.navLeft').addClass('navButtonArrow');
+    //        //    } else {
+    //        //        $('.list-group-item').attr('tabindex', '');
+    //        //        // $('.navLeft').toggleClass('navButtonArrow');
+    //        //    }
+    //        //    $('.row-offcanvas').toggleClass('active');
+    //        //    //$('.navLeft').removeClass('navButtonArrow');
+    //        //    $('.overlay').toggleClass('overlayInactive');
+    //        //});
+    //});
+</script>

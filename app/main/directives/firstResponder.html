@@ -1,0 +1,155 @@
+﻿
+<div class="row" ng-if="mode==='d'">
+    <div class="col-xs-12">
+        <div class="clearfix line-divider">
+            <div class="row text-uppercase">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <h5 class="margin5"> <a ng-class="styleGet()" ui-sref="main.frPerformance({id:firstResponder.id})">{{firstResponder.name}} </a></h5>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-8">
+                    <h5 class="margin5"><strong ng-class="styleGet()" translate>{{statusGet()}}</strong></h5>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 text-right">
+                    <h6 class="margin5"><a ui-sref="main.resources({id:firstResponder.id, resource:'frs'})" translate>v2.resources.details</a></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ul class="list-group" ng-if="mode==='r'">
+    <li class="list-group-item">
+        <div class="well-greyBg abc">
+            <div class="row">
+                <h3 class="col-xs-7 margin0" ng-class="styleGet()">
+                    <i class="fa pull-left" style="margin-left:5px" ng-class="iconGet()"></i>
+                    <span class="text-uppercase text-muted" translate style="margin-left:4px">v2.incidents.status</span><span class="text-muted">: </span>
+                    <strong class="text-uppercase" translate>{{statusGet()}}</strong>
+                </h3>
+                <div class="col-xs-5" role="group" aria-label="Status Changes">
+                    <span class="pull-right">
+                        <span class="btn-group">
+                            <button type="button" class="btn btn-sm btn-default btn-changes" ui-sref="main.firstResponders.edit({id:firstResponder.id})" tm-roles="['Admin','Manager','Dispatcher']">
+                                <i class="fa fa-pencil-square-o"></i><span class="hidden-sm hidden-xs" translate>views.labels.edit</span>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-default btn-changes" confirm-obj="firstResponders" ng-click="remove()" tm-roles="['Admin','Manager']">
+                                <i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> <span translate>views.labels.destroy</span></span>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-default btn-changes" ng-click="logout()" ng-if="firstResponder.state !== 'inactive'">
+                                <i class="fa fa-power-off"></i><span class="hidden-sm hidden-xs" translate>first_responder.actions.log_out</span>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-default btn-changes" ng-click="login()" ng-if="firstResponder.state === 'inactive'">
+                                <i class="fa fa-power-off"></i><span class="hidden-sm hidden-xs" translate>first_responder.actions.log_in</span>
+                            </button>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h3 class="col-md-8 col-sm-9 col-xs-12"> <a ui-sref="main.frPerformance({id:firstResponder.id})">{{firstResponder.name}}</a></h3>
+            <div class="col-md-4 col-sm-3 col-xs-12">
+                <ph-no class="form-group input-blue" icon phone-number="firstResponder.phone_number"></ph-no>
+            </div>
+        </div>
+        <div class="row">
+            <form class="form-horizontal col-xs-12 marginBottom5" name="sendMessageForm">
+                <div class="input-group" ng-class="{'has-error has-feedback': (sendMessageForm.$submitted || sendMessageForm.txtMessage.$touched) && sendMessageForm.txtMessage.$invalid }">
+                    <input type="text" style="height:31px" class="form-control input-sm" name="txtMessage" ng-model="firstResponder.message" placeholder="{{'activierecord.attributes.message_log.message' | translate}}" required>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" style="right:53px" aria-hidden="true"></span>
+
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm btn-FR" type="button" ng-click="sendMessage(sendMessageForm)" style="height:31px" translate style="margin-left:3px;">views.buttons.send</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </li>
+</ul>
+
+
+<li class="list-group-item" ng-if="mode==='l'">
+    <div class="row">
+        <div class="col-sm-5 col-xs-12">
+            <h3 class="visible-xs"><a ng-class="styleGet()" ui-sref="main.frPerformance({id:firstResponder.id})"> <i class="fa pull-left" ng-class="iconGet()"></i>{{firstResponder.name}}</a></h3>
+            <div class="margin5 hidden-xs"><a ng-class="styleGet()" ui-sref="main.frPerformance({id:firstResponder.id})"> <i class="fa pull-left" style="font-size:x-large" ng-class="iconGet()"></i><strong>{{firstResponder.name}}</strong></a></div>
+        </div>
+        <div class="col-sm-4 col-xs-6"><div class="margin5"><ph-no phone-number="firstResponder.phone_number"></ph-no></div></div>
+        <div class="col-sm-3 col-xs-6">
+            <div class="btn-group pull-right" role="group" aria-label="responderEdit">
+                <a class="link btn-link" ui-sref="main.firstResponders.edit({id:firstResponder.id})" tm-roles="['Admin','Manager','Dispatcher']">
+                    <span translate>views.labels.edit</span>
+                </a>
+                <span class="link-seperator"></span>
+                <!--<a class="btn btn-default" ng-click="vm.firstResponderSave(fr)"><i class="fa fa-save"></i> <span translate class="hidden-sm hidden-xs">v2.labels.save</span></a>-->
+                <a class="link btn-link" ng-click="remove()" confirm-obj="firstresponder" tm-roles="['Admin','Manager']">
+                    <span translate>views.labels.destroy</span>
+                </a>
+                <span class="link-seperator"></span>
+                <a class="link btn-link" ng-click="login()" ng-if="firstResponder.state === 'inactive'">
+                    <span translate>first_responder.actions.log_in</span>
+                </a>
+                <a class="link btn-link" ng-click="logout()" ng-if="firstResponder.state !== 'inactive'">
+                    <span translate>first_responder.actions.log_out</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <form class="form-horizontal col-xs-12 col-md-7 marginBottom5" name="sendMessageForm">
+            <div class="input-group" ng-class="{'has-error has-feedback': (sendMessageForm.$submitted || sendMessageForm.txtMessage.$touched) && sendMessageForm.txtMessage.$invalid }">
+                <input type="text" class="form-control input-sm" name="txtMessage" ng-model="firstResponder.message" placeholder="{{'activierecord.attributes.message_log.message' | translate}}" required>
+                <span class="glyphicon glyphicon-remove form-control-feedback" style="right:50px" aria-hidden="true"></span>
+
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm btn-FR" type="button" ng-click="sendMessage(sendMessageForm)" translate style="margin-left:3px;">views.buttons.send</button>
+                </span>
+            </div>
+        </form>
+    </div>
+
+</li>
+
+
+<div ng-if="mode==='i'">
+    <div class="row" style="margin:0 10px 0 10px">
+        <div class="col-xs-6">
+            <h5><span>{{initiatedAt | datetime}}</span></h5>
+        </div>
+        <div class="col-xs-6" ng-if="!firstResponder.state"></div>
+        <div class="col-xs-6" ng-class="styleGet()" ng-if="firstResponder.state">
+            <h5><label class="pull-right" translate="system.first_responder_state.{{firstResponder.state}}" style="white-space:normal"></label></h5>
+        </div>
+    </div><div class="row" style="margin:0 10px 0 10px">
+        <div class="col-xs-6" ng-if="!reportingParty"></div>
+        <div class="col-xs-6 text-left" ng-if="reportingParty">
+            <h5>
+                <span>{{reportingParty.resource_name?reportingParty.resource_name: reportingParty.resource_type }}</span>
+                 <span class="text-nowrap phNoIcon">(<ph-no phone-number="reportingParty.resource_phone_number"></ph-no>)</span>
+            </h5>
+        </div>
+        <div class="col-xs-6 text-right">
+
+            <h5>
+                <span ng-class="styleGet()">
+                    <i class="fa" ng-class="iconGet()" style="font-size:25px;"></i>
+                    {{firstResponder.name}}
+                </span>
+             <span class="text-nowrap phNoIcon">(<ph-no class="form-group" phone-number="firstResponder.phone_number"></ph-no>)</span>
+            </h5>
+        </div>
+    </div>
+    <div class="col-xs-12" ng-if="!hideMsg">
+        <form class="form-horizontal" name="sendMessageForm">
+            <div class="input-group" ng-class="{'has-error has-feedback': (sendMessageForm.$submitted || sendMessageForm.txtMessage.$touched) && sendMessageForm.txtMessage.$invalid }">
+                <input type="text" class="form-control input-sm" ng-model="firstResponder.message" placeholder="{{'views.placeholders.simulate_message' | translate}}">
+                <span class="glyphicon glyphicon-remove form-control-feedback" style="right:50px" aria-hidden="true"></span>
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm btn-FR" type="button" ng-click="sendMessage(sendMessageForm)" translate style="margin-left:3px;">views.buttons.send</button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>

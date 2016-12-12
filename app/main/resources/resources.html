@@ -1,0 +1,125 @@
+﻿<div class="row">
+    <div class="col-lg-7" scroll-if="vm.UI.resource==='frs'">
+        <div class="panel panel-default">
+            <div class="panel-heading beacon-panel">
+                <h4 class="pull-left text-uppercase"><strong translate>activerecord.models.first_responder.other</strong></h4>
+                
+                <span class="pull-right">
+                    <a ui-sref="^.firstResponders" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="bottom" title="New First Responder" tm-roles="['Admin','Manager']">
+                        <!--<i class="fa fa-plus hidden-lg hidden-md hidden-sm"></i>--><span translate>v2.resources.new_first_responder</span>
+                    </a>
+                </span>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body" ng-swipe-left="vm.moveNextFR()" ng-swipe-right="vm.movePreviousFR()">
+                <first-responder first-responder="vm.firstResponder" mode="r" on-change="vm.updateFrs()" on-remove="vm.removeFrs()"></first-responder>
+                <div class="btn-actions">
+                    <div class="row">
+                        <div class="col-xs-3 text-left"><button type="button" ng-if="vm.frCurrent" ng-click="vm.movePreviousFR()" class="btn btn-sm btn-link"><img src="../../../images/ic_arrow_back_white_24px.svg" /> <!--<span class="glyphicon glyphicon-arrow-left"></span> <span translate>v2.dashboard.previous</span>--></button></div>
+                        <div class="col-xs-6 text-center"><button type="button" class="btn btn-sm btn-primary btn-fullradius" ui-sref="^.firstResponders" translate>v2.dashboard.view_all</button></div>
+                        <div class="col-xs-3 text-right"><button type="button" ng-if="vm.lastFRIndex && vm.lastFRIndex > vm.frCurrent" ng-click="vm.moveNextFR()" class="btn btn-sm btn-link"><img src="../../../images/ic_arrow_forward_white_24px.svg" /> <!--<span translate>v2.dashboard.next</span> <span class="glyphicon glyphicon-arrow-right"></span>--></button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5" scroll-if="vm.UI.resource==='h'">
+        <div class="panel panel-default">
+            <div class="panel-heading beacon-panel"><h4 class="text-uppercase"><strong translate>activerecord.models.hospital.other</strong></h4></div>
+            <div class="panel-body" ng-swipe-left="vm.moveNextHospital()" ng-swipe-right="vm.movePreviousHospital()">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="well-greyBg">
+                            <div class="row">
+                                <h3 class="col-lg-7 col-md-7 col-sm-9 col-xs-8 margin0"><strong class="margin5">{{vm.hospital.name}}</strong></h3>
+                                <div class="col-lg-5 col-md-5 col-sm-3 col-xs-4" role="group" aria-label="Status Changes">
+                                    <span class="pull-right">
+                                        <span class="btn-group" tm-roles="['Admin','Manager']">
+                                            <button type="button" ui-sref="^.hospitalList({id:vm.hospital.id, edit: true})" class="btn btn-sm btn-default btn-changes"><i class="fa fa-pencil-square-o"></i><span class="hidden-sm hidden-xs" translate>views.labels.edit</span></button>
+                                            <button type="button" ng-click="vm.hospitalRemove(vm.hospital)" class="btn btn-sm btn-default btn-changes" confirm-obj="vm.hospital"><i class="fa fa-trash"></i><span class="hidden-sm hidden-xs" translate>views.labels.destroy</span></button>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="row">
+                                <div class=" clearfix">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><h5 class="text-uppercase" translate>v2.hospitals_list.address</h5></div>
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><h5 class="text-right">{{vm.hospital.address}}</h5></div>
+                                </div>
+                            </div>
+                            <div class="row line-above" ng-repeat="doctor in vm.getDoctors(vm.hospital.id)">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><h5>DOCTOR:</h5></div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><h5 class="text-right">{{doctor.name}}</h5></div>
+                            </div>
+                            <!--<div class="row">
+            <ph-no class="form-group col-xs-11 margin10" icon phone-number="'555.555.5555'"></ph-no>
+        </div>-->
+</li>
+                </ul>
+                <div class="btn-actions">
+                    <div class="row">
+                        <div class="col-xs-3 text-left"><button type="button" ng-if="vm.hospitalCurrent" ng-click="vm.movePreviousHospital()" class="btn btn-sm btn-link"><img src="../../../images/ic_arrow_back_white_24px.svg" /><!--<span class="glyphicon glyphicon-arrow-left"></span><span translate>v2.dashboard.previous</span>--> </button></div>
+                        <div class="col-xs-6 text-center"><a class="btn btn-sm btn-primary btn-fullradius" onclick="return false;" ui-sref="^.hospitalList({id:0})" translate>v2.dashboard.view_all</a></div>
+                        <div class="col-xs-3 text-right"><button button="type" ng-if="vm.lastHospitalIndex && vm.lastHospitalIndex > vm.hospitalCurrent" ng-click="vm.moveNextHospital()" class="btn btn-sm btn-link"><img src="../../../images/ic_arrow_forward_white_24px.svg" /><!--<span translate>v2.dashboard.next</span> <span class="glyphicon glyphicon-arrow-right"></span>--></button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<div class="row">
+    <div class="col-lg-7" scroll-if="vm.UI.resource==='w'">
+               <div class="panel panel-default">
+                <div class="panel-heading beacon-panel"><h4 class="text-uppercase"><strong translate>activerecord.models.white_listed_phone_number.other</strong></h4></div>
+                <div class="panel-body" ng-swipe-left="vm.moveNextDisp()" ng-swipe-right="vm.movePreviousDisp()">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="well-greyBg">
+                                <div class="row">
+                                    <h3 class="col-lg-7 col-md-7 col-sm-9 col-xs-8 margin0"><strong class="margin5">{{vm.dispPhNo.name}}</strong></h3>
+                                    <div class="col-lg-5 col-md-5 col-sm-3 col-xs-4" role="group" aria-label="Status Changes">
+                                        <span class="pull-right">
+                                            <span class="btn-group" tm-roles="['Admin','Manager']">
+                                                <button type="button" ui-sref="^.dispatchPhoneNoList({id:vm.dispPhNo.id, edit:true})" class="btn btn-sm btn-default btn-changes"><i class="fa fa-pencil-square-o"></i><span class="hidden-sm hidden-xs" translate>views.labels.edit</span></button>
+                                                <button type="button" ng-click="vm.dispRemove(vm.dispPhNo)" class="btn btn-sm btn-default btn-changes" confirm-obj="vm.dispPhNo"><i class="fa fa-trash"></i><span class="hidden-sm hidden-xs" translate>views.labels.destroy</span></button>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class=" clearfix">
+                                    <div class="col-lg-5">
+                                        <ph-no phone-number="vm.dispPhNo.phone_number"></ph-no>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="btn-actions">
+                        <div class="row">
+                            <div class="col-xs-3 text-left"><button type="button" ng-if="vm.dispPhNoCurrent" ng-click="vm.movePreviousDisp()" class="btn btn-sm btn-link"><img src="../../../images/ic_arrow_back_white_24px.svg" /> <!--<span class="glyphicon glyphicon-arrow-left"></span><span translate>v2.dashboard.previous</span>--> </button></div>
+                            <div class="col-xs-6 text-center"><a class="btn btn-sm btn-primary btn-fullradius" onclick="return false;" ui-sref="^.dispatchPhoneNoList({id:0})" translate>v2.dashboard.view_all</a></div>
+                            <div class="col-xs-3 text-right"><button button="type" ng-if="vm.lastDispIndex && vm.lastDispIndex > vm.dispPhNoCurrent" ng-click="vm.moveNextDisp()" class="btn btn-sm btn-link"><img src="../../../images/ic_arrow_forward_white_24px.svg" /><!--<span translate>v2.dashboard.next</span> <span class="glyphicon glyphicon-arrow-right"></span>--></button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+       
+        <div class="col-lg-5">
+            <div class="panel panel-default">
+                <div class="panel-heading beacon-panel"><h4><strong class="text-uppercase" translate>v2.resources.additional_configuration</strong></h4></div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item text-center addConfListLinks">
+                            <div ng-include="'app/views/additionalConfig.html'"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    
+</div>
+

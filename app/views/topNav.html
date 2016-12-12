@@ -1,0 +1,31 @@
+﻿<div class="navbar navbarTop navbar-fixed-top">
+    <div class="pull-right">
+        <ul class="nav-links-logout">
+            <li><a>{{vm.profile.userInfo.username}}</a></li>
+            <li><a class="btn-logout " ng-click="vm.logout()"><!--<span class="glyphicon glyphicon-off" aria-hidden="true"></span>--> <span translate> views.sessions.log_out_action</span></a></li>
+        </ul>
+    </div><!--/.nav-collapse -->
+
+    <div class="dropdown dataCenterName hidden-sm hidden-xs">
+        <button class="btn btn-primary btn-datacenter dropdown-toggle" type="button" id="dataCenterNameList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{vm.dataCenter.name}}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dataCenterNameList">
+            <li ng-repeat="dc in vm.UI.dataCenters"><a ng-click="vm.changeDataCenter(dc)"> {{dc.name}}</a></li>
+        </ul>
+    </div>
+    <div class="clearfix hidden-lg"></div>
+    <div class="col-lg-12 topSubNavContainer hidden-lg hidden-md">
+        <div class="dropdown dataCenterName">
+            <button class="btn btn-primary btn-datacenter dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                {{vm.dataCenter.name}}
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li ng-repeat="dc in vm.UI.dataCenters"><a ng-click="vm.changeDataCenter(dc)"> {{dc.name}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

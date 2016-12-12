@@ -1,0 +1,82 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-grey">
+            <div class="panel-heading beacon-panel">
+                <h4 class="pull-left text-uppercase"><strong translate> views.category.listing</strong></h4>
+                <a id="aSettings" ui-sref="main.settings" class="btn btn-sm btn-default pull-right"><i class="fa fa-cog"></i> <span translate>activerecord.models.setting.other</span></a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="panel-body">
+                <div class="well well-sm" tm-roles="['Admin','Manager']">
+                    <h3 class="text-uppercase text-center" translate>v2.category.add_category</h3>
+                    <hr />
+                    <div class="clearfix">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <form name="addCategoryForm" class="form-horizontal clearfix">
+                                <div class="form-group" ng-class="{'has-error has-feedback': (addCategoryForm.$submitted || addCategoryForm.txtName.$touched) && addCategoryForm.txtName.$invalid }">
+                                    <label class="col-sm-2 control-label" translate>activerecord.attributes.administrator.name</label>
+                                    <div class="col-sm-10">
+                                        <input id="txtName" name="txtName" type="text" class="form-control input-sm" placeholder="{{'activerecord.attributes.administrator.name' | translate}}" ng-model="vm.category.name" autocomplete="off" required>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group text-center"><button id="btnCreate" class="btn btn-sm btn-primary btn-fullradius" formnovalidate ng-click="vm.createCategory(addCategoryForm)" translate>v2.labels.create</button></div>
+                            </form>
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </div>
+
+                <ul class="list-group" ng-repeat="cat in vm.categoriesList">
+                    <li class="list-group-item">
+                        <form name="editCat{{cat.id}}">
+                            <div class="row">
+                                <div class="col-sm-7 col-xs-12 form-group form-group-sm" ng-class="{'has-error has-feedback': (editCat{{cat.id}}.$submitted || editCat{{cat.id}}.cName.$touched) && editCat{{cat.id}}.cName.$invalid }">
+                                    <h3 ng-if="!cat.isEdit" class="visible-xs margin5 text-uppercase">{{cat.name}}</h3><span class="hidden-xs text-uppercase" ng-if="!cat.isEdit">{{cat.name}}</span>
+                                    <input type="text" class="form-control" ng-if="cat.isEdit" name="cName" ng-model=" cat.name" autocomplete="off" required />
+                                    <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="col-sm-2 col-xs-6">
+                                    <button id="btnCreateSubcategory" class="btn btn-xs btn-changes" ng-click="vm.subcategoryAdd(cat.id)" tm-roles="['Admin','Manager']" translate>views.category.new_subcategory</button>
+                                </div>
+                                <div class="col-sm-3 col-xs-6">
+                                    <div class="btn-group btn-group-sm pull-right" role="group" aria-label="categoryEdit" tm-roles="['Admin','Manager']">
+                                        <a class="link btn-link" onclick="return false;" ng-if=!cat.isEdit ng-click="cat.isEdit=true"><span translate>views.labels.edit</span></a>
+                                        <a class="link btn-link" ng-if="cat.isEdit" ng-click="vm.categorySave(cat, editCat{{cat.id}})"><span translate>v2.labels.save</span></a>
+                                        <span class="link-seperator"></span>
+                                        <a class="link btn-link" ng-if="cat.id" ng-click="vm.categoryRemove(cat)" confirm-obj="cat"><span translate>views.labels.destroy</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="list-group-item" ng-repeat="sub in vm.subcategoriesList| filter: {category_id: cat.id} : true">
+                        <ul class=" list-unstyled">
+                            <li>
+                                <form name="edit{{cat.id}}{{sub.id}}">
+                                    <div class="row">
+                                        <div class="col-xs-8 form-group-sm" ng-class="{'has-error has-feedback': (edit{{cat.id}}{{sub.id}}.$submitted || edit{{cat.id}}{{sub.id}}.sName.$touched) && edit{{cat.id}}{{sub.id}}.sName.$invalid }">
+                                            <span class="glyphicon glyphicon-triangle-right" ng-if=!sub.isEdit></span>
+                                            <translate ng-if=!sub.isEdit translate="category.{{cat.name}}.{{sub.name}}"></translate>
+                                            <input placeholder="{{'activerecord.attributes.subcategory'|translate}}" class="form-control" name="sName" ng-if=sub.isEdit type="text" ng-model="sub.name" autocomplete="off" required />
+                                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        </div>
+                                        <div class="col-xs-4 pull-right">
+                                            <div class="btn-group btn-group-sm pull-right" role="group" aria-label="subCatergoryEdit" tm-roles="['Admin','Manager']">
+                                                <a class="link btn-link" ng-if=!sub.isEdit ng-click="sub.isEdit=true"><span translate>views.labels.edit</span></a>
+                                                <a class="link btn-link" ng-if=sub.isEdit ng-click="vm.subcategorySave(sub, edit{{cat.id}}{{sub.id}})"><span translate>v2.labels.save</span></a>
+
+                                                <a class="link btn-link" ng-if="sub.id" ng-click="vm.subcategoryRemove(sub)" confirm-obj="sub"><span class="link-seperator"></span><span translate>views.labels.destroy</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>

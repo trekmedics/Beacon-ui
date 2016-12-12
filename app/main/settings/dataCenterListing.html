@@ -1,0 +1,83 @@
+﻿
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-grey">
+            <div class="panel-heading beacon-panel"><h4 class="pull-left"><strong translate>views.data_center.listing</strong></h4><a id="aSettings" ui-sref="main.settings" class="btn btn-sm btn-default pull-right"><i class="fa fa-cog"></i> <span translate>activerecord.models.setting.other</span></a><div class="clearfix"></div></div>
+            <div class="panel-body">
+                <div class="well well-sm">
+                    <h3 class="text-center text-uppercase"><span translate>views.data_center.new</span></h3>
+                    <hr />
+                    <div class="clearfix">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <form name="addDataCenterForm" class="form-horizontal">
+                                <div class="form-group" ng-class="{'has-error has-feedback': (addDataCenterForm.$submitted || addDataCenterForm.txtName.$touched) && addDataCenterForm.txtName.$invalid }">
+                                    <label class="col-sm-2 control-label text-uppercase" translate>activerecord.attributes.administrator.name</label>
+                                    <div class="col-sm-10">
+                                        <input id="txtName" name="txtName" type="text" class="form-control input-sm" placeholder="{{'activerecord.attributes.administrator.name' | translate}}" ng-model="vm.datacenter.name" autocomplete="off" required>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label hidden-xs text-uppercase" translate>activerecord.attributes.data_center.is_simulator</label>
+                                    <div class="col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input id="blnIssimulator" type="checkbox" ng-model="vm.datacenter.is_simulator"><span class="visible-xs text-uppercase" translate> activerecord.attributes.data_center.is_simulator</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10 text-center">
+                                        <button id="btnCreate" class="btn btn-sm btn-primary btn-fullradius" formnovalidate ng-click="vm.createDataCenter(addDataCenterForm)"><span translate>v2.labels.create</span></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </div>
+                <!-- table-->
+                <ul class="list-group dataCenterListGroup">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-6"><strong translate>activerecord.attributes.administrator.name</strong></div>
+                            <div class="col-xs-3"><strong translate>activerecord.attributes.data_center.is_simulator</strong></div>
+
+                        </div>
+                    </li>
+                    <li class="list-group-item" ng-repeat="datacenter in vm.datacenters">
+                        <form name="editDC{{datacenter.id}}">
+                            <div class="row">
+                                <div class="row col-sm-9 form-inline" ng-if="datacenter.isEdit">
+                                    <div class="col-sm-8 col-xs-12" ng-class="{'has-error has-feedback': (editDC{{datacenter.id}}.$submitted|| editDC{{datacenter.id}}.dName.$touched) && editDC{{datacenter.id}}.dName.$invalid }">
+                                        <input class="form-control input-sm" type="text" name="dName" ng-model="datacenter.name" autocomplete="off" required />
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-4 checkbox">
+                                        <label>
+                                            <input id="blnIssimulator" type="checkbox" ng-model="datacenter.is_simulator"><span class="margin5" translate>activerecord.attributes.data_center.is_simulator</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6" ng-if="!datacenter.isEdit"><h3 class="visible-xs margin5">{{datacenter.name}}</h3><div class="margin5 hidden-xs">{{datacenter.name}}</div></div>
+                                <div class="col-xs-2" ng-if="!datacenter.isEdit"><div class="margin5">{{datacenter.is_simulator}}</div></div>
+
+                                <div class="col-xs-4 pull-right">
+                                    <div class="btn-group btn-group-sm pull-right" role="group" aria-label="adminEdit">
+                                        <a class="link btn-link" ng-if="!datacenter.isEdit" ng-click="datacenter.isEdit=true"><span translate>views.labels.edit</span></a>
+                                        <a class="link btn-link" ng-if="datacenter.isEdit" ng-click="vm.datacenterSave(datacenter,editDC{{datacenter.id}})"><span translate>v2.labels.save</span></a>
+                                        <span class="link-seperator"></span>
+                                        <a class="link btn-link" ng-click="vm.datacenterRemove(datacenter)" confirm-obj="datacenter"><span translate>views.labels.destroy</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>

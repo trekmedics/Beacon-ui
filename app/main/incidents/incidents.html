@@ -1,0 +1,25 @@
+﻿<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default panel-grey" ng-swipe-left="vm.recentNext()" ng-swipe-right="vm.recentPrevious()">
+            <div class="panel-heading beacon-panel"><h4 class="pull-left text-uppercase"><strong translate>v2.incidents.recent_incidents</strong></h4><span class="pull-right"><a ui-sref="^.newIncident" class="btn btn-sm btn-danger" translate>views.incident.new</a></span><div class="clearfix"></div></div>
+            <div class="panel-body">
+                <incident ng-if="vm.recentIncident" incident="vm.recentIncident"></incident>
+                <div class="btn-actions">
+                    <div class="btn-group-sm" role="group">
+                        <div class="col-xs-3 text-left"><button type="button" ng-if="vm.recentCurrent" ng-click="vm.recentPrevious()" class="btn btn-sm btn-link pull-left"><img src="../../../images/ic_arrow_back_white_24px.svg" /><!--<span class="glyphicon glyphicon-arrow-left"></span><span translate>v2.dashboard.previous</span>--> </button></div>
+                        <div class="col-xs-6 text-center"><button type="button" class="btn btn-sm btn-primary btn-fullradius" ng-if="vm.recentIncidents.length" ui-sref="^.incidentDetails({id:vm.recentIncident.id})" translate>v2.resources.details</button></div>
+                        <div class="col-xs-3 text-left"><button type="button" ng-if="vm.recentlastIndex && vm.recentlastIndex > vm.recentCurrent" ng-click="vm.recentNext()" class="btn btn-sm btn-link pull-right"><img src="../../../images/ic_arrow_forward_white_24px.svg" /> <!--<span translate>v2.dashboard.next</span> <span class="glyphicon glyphicon-arrow-right"></span>--></button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default panel-grey" >
+            <div class="panel-heading beacon-panel"><h4 class="text-uppercase"><strong translate>v2.incidents.archived_incidents</strong></h4></div>
+            <div class="panel-body" ng-repeat="archiveIncident in vm.archiveIncidents">
+                <incident ng-if="archiveIncident" incident="archiveIncident"></incident>                
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿<div id="divLoader"class="loading overlayInactive"><img src="images/page-loader.gif" /></div>
+<div ng-include="'app/views/topNav.html'"></div>
+<div class="container-fluid">
+    <div class="row-offcanvas row-offcanvas-left">
+        <div ng-include="'app/views/sideNav.html'"></div>
+        <div class="row">
+            <div id="mainDisplay" class="col-xs-12 col-sm-10 content">
+                <div class="panel hidden">
+                    <div class="panel-body" ncy-breadcrumb></div>
+                </div>
+                <div ui-view>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

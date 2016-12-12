@@ -1,0 +1,88 @@
+﻿<div class="login-container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="text-center">
+                <img src="images/Logo.png" alt="Beacon Logo" />
+            </div>
+            <div class="tab-content">
+                <div id="login" class="tab-pane transparent active">
+                    <h3 class="welcome-text text-center">
+                        Welcome to the Beacon admin tool
+                    </h3>
+                    <form name="loignForm" novalidate role="form" class="form-horizontal loignForm">
+                        <div class="form-group form-group-sm" ng-class="{'has-error has-feedback': (loignForm.$submitted || loignForm.userName.$touched) && loignForm.userName.$invalid }">
+                            <label for="userName" class="col-lg-2 col-md-3 col-sm-2 control-label">USER NAME</label>
+                            <div class="col-lg-10 col-md-7 col-sm-10">
+                                <input type="text" placeholder="Username" ng-model="vm.userName" name="userName" id="userName" class="form-control" required>
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block" ng-messages="loignForm.userName.$error" ng-if=" vm.submitted || loignForm.userName.$touched">
+                                    <p ng-message="required">Username Required.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm" ng-class="{'has-error has-feedback': (loignForm.$submitted || loignForm.password.$touched) && loignForm.password.$invalid }">
+                            <label for="password" class="col-lg-2 col-md-3 col-sm-2 control-label">PASSWORD</label>
+                            <div class="col-lg-10 col-md-7 col-sm-10">
+                                <input type="password" placeholder="Password" name="password" ng-model="vm.password" id="password" class="form-control" required>
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block" ng-messages="loignForm.password.$error" ng-if="vm.submitted || loignForm.password.$touched">
+                                    <p ng-message="required">Password Required.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <div class="text-center">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="vm.rememberMe"> REMEMBER ME
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-danger h6 form-inline" ng-show="vm.showError">
+                            Please provide valid credentials
+                            <a type="button" class="pull-right" ng-click="vm.showError=false" aria-label="Close"><span aria-hidden="true">X</span></a>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <div class="text-center">
+                                <button id="btnLogin" ng-click="vm.login(loignForm)" class="btn btn-login">LOG IN</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group form-group-sm row">
+                        <div class="text-center">
+                            <a class="link-underline" href="#forgot" onclick="return false;" data-toggle="tab">FORGOT PASSWORD?</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="forgot" class="tab-pane transparent">
+                    <!--<p class="text-muted text-center">Enter your valid e-mail</p>
+                    <form name="forgotPwd" role="form">
+                    <div class="form-group form-group-sm">
+                        <label class="control-label" for="email">EMAIL</label>
+                        <div>
+                            <input type="email" placeholder="mail@domain.com" id="email" required="required" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <div class="text-center">
+                            <button class="btn btn-default" type="submit">RECOVER PASSWORD</button>
+                        </div>
+                    </div>
+                    </form>-->
+                    <h4 class="welcome-text text-info text-center">Please Contact Your Administrator.</h4>
+                    <div class="form-group form-group-sm">
+                        <div class="text-center">
+                            <a class="btn btn-default text-muted" href="#login" onclick="return false;" data-toggle="tab">LOG IN</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="poweredby text-center">
+                <p>CREATED BY:</p>
+                <img src="images/TrekLogo.png" alt="Trek Logo" />
+            </div>
+        </div>
+    </div>
+</div>

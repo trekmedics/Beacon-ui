@@ -1,0 +1,106 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-grey">
+            <div class="panel-heading beacon-panel"><h4 class="pull-left text-uppercase"><strong translate> views.administrator.listing</strong></h4><a id="aSettings" ui-sref="main.settings" class="btn btn-sm btn-default pull-right"><i class="fa fa-cog"></i> <span translate>activerecord.models.setting.other</span></a><div class="clearfix"></div></div>
+
+            <div class="panel-body">
+                <div class="well well-sm" tm-roles="['Admin']">
+                    <h4 class="text-uppercase text-center"><strong translate> v2.notification_list.add_number</strong></h4>
+                    <hr />
+
+                    <form name="addAllocationForm" class="form form-horizontal clearfix">
+                        
+                            <div class="form-group">
+                                <div class="col-xs-6 col-md-4" ng-class="{'has-error has-feedback': (addAllocationForm.$submitted || addAllocationForm.txtName.$touched) && addAllocationForm.txtName.$invalid }">
+                                    <label class="col-sm-3 control-label text-uppercase"><span translate>activerecord.attributes.administrator.name</span></label>
+                                    <div class="col-sm-9 col-xs-12">
+                                        <input type="text" id="txtName" name="txtName" class="form-control input-sm" placeholder="{{'activerecord.attributes.administrator.name' | translate}}" ng-model="vm.notification.name" autocomplete="off" required>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-4" ng-class="{'has-error has-feedback': (addAllocationForm.submitted || addAllocationForm.txtPhno.$touched) && addAllocationForm.txtPhno.$invalid }">
+                                    <label class="col-sm-5 control-label text-uppercase" translate>activerecord.attributes.administrator.phone_number</label>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <input type="text" id="txtPhno" name="txtPhno" ng-pattern="/\+\d{10,15}$/" class="form-control input-sm" placeholder="{{'activerecord.attributes.administrator.phone_number' | translate}}" ng-model="vm.notification.phone_number" autocomplete="off" required>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4" ng-class="{'has-error has-feedback': (addAllocationForm.submitted || addAllocationForm.txtEmail.$touched) && addAllocationForm.txtEmail.$invalid }">
+                                    <label class="col-sm-3 control-label text-uppercase"><span translate>activerecord.attributes.administrator.email</span></label>
+                                    <div class="col-sm-9 col-xs-12">
+                                        <input type="email" id="txtEmail" name="txtEmail" ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i" class="form-control input-sm" placeholder="{{'activerecord.attributes.administrator.email' | translate}}" ng-model="vm.notification.email" autocomplete="off" required>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="text-center marginTop10">
+                                        <button class="btn btn-sm btn-primary btn-fullradius" id="btnCreate" formnovalidate ng-click="vm.createNotification(addAllocationForm)" translate>v2.labels.create</button>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <!--<div class="form-group col-md-3" ng-class="{'has-error has-feedback': (addAllocationForm.submitted || addAllocationForm.txtEmail.$touched) && addAllocationForm.txtEmail.$invalid }">
+                            <label class="col-sm-3 control-label"><span translate>activerecord.attributes.administrator.email</span></label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="email" id="txtEmail" name="txtEmail" ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i" class="form-control input-sm" placeholder="{{'activerecord.attributes.administrator.email' | translate}}" ng-model="vm.notification.email" autocomplete="off" required>
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                        </div>-->
+                        
+                    </form>
+                </div>
+                <ul class="list-group ph-list" ng-repeat="notfn in vm.notifications">
+                    <li class="list-group-item clearfix">
+                        <form name="editNOTFN{{notfn.id}}">
+                            <div class="row">
+
+                                <div class="col-xs-4" ng-if="!notfn.isEdit">
+                                    <div class="margin5 hidden-xs">{{notfn.name}}</div>
+                                    <h4 class="visible-xs margin5">{{notfn.name}}</h4>
+                                </div>
+                                <div class="col-xs-4" ng-if="!notfn.isEdit">
+                                    <div class="margin5">
+                                        <ph-no phone-number=notfn.phone_number class="phListNoIcon"></ph-no>
+                                    </div>
+                                </div>
+                                <!--<div class="col-lg-3 col-md-5 col-sm-5 col-xs-12" ng-if="!notfn.isEdit">
+                                    <div class="margin5 hidden-xs">{{notfn.email}}</div>
+                                    <h3 class="visible-xs margin5">{{notfn.email}}</h3>
+                                </div>-->
+                                <div class="col-xs-12 col-lg-8 form-inline" ng-if="notfn.isEdit">
+                                        <div class="col-lg-4 form-group" ng-class="{'has-error has-feedback': (editNOTFN{{notfn.id}}.$submitted|| editNOTFN{{notfn.id}}.nName.$touched) && editNOTFN{{notfn.id}}.nName.$invalid }">
+                                            <input class=" form-control input-sm" type="text" name="nName" ng-model="notfn.name" autocomplete="off" required />
+                                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        </div>
+                                        <div class="col-lg-4 form-group" ng-class="{'has-error has-feedback': (editNOTFN{{notfn.id}}.$submitted|| editNOTFN{{notfn.id}}.nNumber.$touched) && editNOTFN{{notfn.id}}.nNumber.$invalid }">
+                                            <input class="form-control input-sm" type="text" name="nNumber" ng-model="notfn.phone_number" ng-pattern="/\+\d{10,15}$/" autocomplete="off" required />
+                                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        </div>
+                                        <div class="col-lg-4 form-group" ng-class="{'has-error has-feedback': (editNOTFN{{notfn.id}}.$submitted|| editNOTFN{{notfn.id}}.nEmail.$touched) && editNOTFN{{notfn.id}}.nEmail.$invalid }">
+                                            <input class="form-control input-sm" type="text" name="nEmail" ng-model="notfn.email" ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i" autocomplete="off" required />
+                                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pull-right">
+                                    <div class="pull-right" style="margin-top:5px;" role="group" aria-label="adminEdit" tm-roles="['Admin']">
+                                        <a class="link btn-link" ng-if="!notfn.isEdit" ng-click="notfn.isEdit=true">
+                                            <i class="fa fa-pencil-square-o hidden"></i> <span translate>views.labels.edit</span>
+                                        </a>
+                                        <a class="link btn-link" ng-if="notfn.isEdit" ng-click="vm.notificationSave(notfn,editNOTFN{{notfn.id}})">
+                                            <i class="fa fa-save hidden"></i> <span translate>v2.labels.save</span>
+                                        </a>
+                                        <span class="link-seperator"></span>
+                                        <a class="link btn-link" ng-click="vm.notificationRemove(notfn)" confirm-obj="notfn">
+                                            <i class="fa fa-trash hidden"></i> <span translate>views.labels.destroy</span>
+                                        </a>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

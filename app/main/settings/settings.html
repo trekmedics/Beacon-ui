@@ -1,0 +1,319 @@
+﻿<div class="row">
+    <div class="col-lg-7">
+        <div class="panel panel-default panel-grey">
+            <div class="panel-heading beacon-panel"><h4 class="pull-left text-uppercase"><strong translate>activerecord.models.setting.other</strong></h4><div class="clearfix"></div></div>
+            <div class="panel-body">
+
+                <ul class="list-group">
+                    <li class="list-group-item" tm-roles="['Admin','Manager']">
+                        <form class="row" name="bnForm">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.beacon_number.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.beacon_number.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4" ng-if="!vm.settings.beacon_number.isEdit">
+                                <h5><ph-no phone-number="vm.settings.beacon_number.value"></ph-no></h5>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 form-group" ng-if="vm.settings.beacon_number.isEdit" ng-class="{'has-error has-feedback': (bnForm.$submitted || bnForm.bNumber.$touched) && bnForm.bNumber.$invalid }">
+                                <input type="text" name="bNumber" ng-model="vm.settings.beacon_number.value" ng-pattern="/\+\d{10,15}$/" class="form-control input-sm" required />
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="!vm.settings.beacon_number.isEdit" ng-click="vm.settings.beacon_number.isEdit=true"><span translate>views.labels.edit</span></a>
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="vm.settings.beacon_number.isEdit" ng-click="vm.settingSave(vm.settings.beacon_number,bnForm)"> <span translate>v2.labels.save</span></a>
+                            </div>
+                        </form>
+                    </li>
+
+                    <li class="list-group-item" tm-roles="['Admin','Manager']">
+                        <form class="row" name="anForm">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.admin_number.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.admin_number.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4" ng-if="!vm.settings.admin_number.isEdit">
+                                <h5><ph-no phone-number="vm.settings.admin_number.value"></ph-no></h5>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 form-group" ng-if="vm.settings.admin_number.isEdit" ng-class="{'has-error has-feedback': (anForm.$submitted || anForm.aNumber.$touched) && anForm.aNumber.$invalid }">
+                                <input type="text" name="aNumber" ng-model="vm.settings.admin_number.value" ng-pattern="/\+\d{10,15}$/" class="form-control input-sm" required />
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="!vm.settings.admin_number.isEdit" ng-click="vm.settings.admin_number.isEdit=true"> <span translate>views.labels.edit</span></a>
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="vm.settings.admin_number.isEdit" ng-click="vm.settingSave(vm.settings.admin_number,anForm)"> <span translate>v2.labels.save</span></a>
+                            </div>
+                        </form>
+                    </li>
+
+
+                    <li class="list-group-item" tm-roles="['Admin','Manager','Dispatcher']">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.message_language.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.message_language.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4">
+                                <div class="radio">
+                                    <label ng-class="{'text-info' : vm.settings.message_language.value==='en'}">
+                                        <input type="radio" name="userLang" ng-model="vm.settings.message_language.value" value="en"> EN
+                                    </label>
+
+                                    <label ng-class="{'text-info' : vm.settings.message_language.value==='es'}">
+                                        <input type="radio" name="userLang" ng-model="vm.settings.message_language.value" value="es"> ES
+                                    </label>
+
+                                    <label ng-class="{'text-info' : vm.settings.message_language.value==='ht'}">
+                                        <input type="radio" name="userLang" ng-model="vm.settings.message_language.value" value="ht"> HT
+                                    </label>
+
+                                    <label ng-class="{'text-info' : vm.settings.message_language.value==='sw'}">
+                                        <input type="radio" name="userLang" ng-model="vm.settings.message_language.value" value="sw"> SW
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-click="vm.settingSave(vm.settings.message_language)"><span translate>v2.labels.save</span></a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item" tm-roles="['Admin','Manager']">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.admin_language.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.admin_language.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4">
+                                <div class="radio">
+                                    <label ng-class="{'text-info' : vm.settings.admin_language.value==='en'}">
+                                        <input type="radio" name="adminLang" ng-model="vm.settings.admin_language.value" value="en"> EN
+                                    </label>
+                                    <label ng-class="{'text-info' : vm.settings.admin_language.value==='es'}">
+                                        <input type="radio" name="adminLang" ng-model="vm.settings.admin_language.value" value="es"> ES
+                                    </label>
+                                    <label ng-class="{'text-info' : vm.settings.admin_language.value==='ht'}">
+                                        <input type="radio" name="adminLang" ng-model="vm.settings.admin_language.value" value="ht"> HT
+                                    </label>
+                                    <label ng-class="{'text-info' : vm.settings.admin_language.value==='sw'}">
+                                        <input type="radio" name="adminLang" ng-model="vm.settings.admin_language.value" value="sw"> SW
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-click="vm.settingSave(vm.settings.admin_language)"><span translate>v2.labels.save</span></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" >
+                        <form class="row" name="fraForm">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.number_of_frs_to_allocate.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.number_of_frs_to_allocate.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4" ng-if="!vm.settings.number_of_frs_to_allocate.isEdit">
+                                <h5><a href="" class="text-uppercase text-info">{{vm.settings.number_of_frs_to_allocate.value}}</a></h5>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 form-group" ng-if="vm.settings.number_of_frs_to_allocate.isEdit" ng-class="{'has-error has-feedback': (fraForm.$submitted || fraForm.frNumber.$touched) && fraForm.frNumber.$invalid }">
+                                <input type="text" name="frNumber" ng-model="vm.settings.number_of_frs_to_allocate.value" class="form-control input-sm" ng-pattern="/^\d+$/" required />
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="!vm.settings.number_of_frs_to_allocate.isEdit" ng-click="vm.settings.number_of_frs_to_allocate.isEdit=true"><span translate>views.labels.edit</span></a>
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="vm.settings.number_of_frs_to_allocate.isEdit" ng-click="vm.settingSave(vm.settings.number_of_frs_to_allocate,fraForm)"><span translate>v2.labels.save</span></a>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="list-group-item" tm-roles="['Admin','Manager','Dispatcher']">
+                        <form class="row" name="minfrForm">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.minimum_number_of_frs.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.minimum_number_of_frs.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4" ng-if="!vm.settings.minimum_number_of_frs.isEdit">
+                                <h5><a href="" class="text-uppercase text-info">{{vm.settings.minimum_number_of_frs.value}}</a></h5>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 form-group" ng-if="vm.settings.minimum_number_of_frs.isEdit" ng-class="{'has-error has-feedback': (minfrForm.$submitted || minfrForm.frNumber.$touched) && minfrForm.frNumber.$invalid }">
+                                <input type="text" name="frNumber" ng-model="vm.settings.minimum_number_of_frs.value" class="form-control input-sm" ng-pattern="/^\d+$/" required />
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="!vm.settings.minimum_number_of_frs.isEdit" ng-click="vm.settings.minimum_number_of_frs.isEdit=true"><span translate>views.labels.edit</span></a>
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="vm.settings.minimum_number_of_frs.isEdit" ng-click="vm.settingSave(vm.settings.minimum_number_of_frs,minfrForm)"><span translate>v2.labels.save</span></a>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="list-group-item" tm-roles="['Admin','Manager','Dispatcher']">
+                        <form class="row" name="ntvForm">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.number_of_transport_vehicles_to_allocate.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.number_of_transport_vehicles_to_allocate.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4" ng-if="!vm.settings.number_of_transport_vehicles_to_allocate.isEdit">
+                                <h5><a href="" class="text-uppercase text-info">{{vm.settings.number_of_transport_vehicles_to_allocate.value}}</a></h5>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 form-group" ng-if="vm.settings.number_of_transport_vehicles_to_allocate.isEdit" ng-class="{'has-error has-feedback': (ntvForm.$submitted || ntvForm.frNumber.$touched) && ntvForm.frNumber.$invalid }">
+                                <input type="text" name="frNumber" ng-model="vm.settings.number_of_transport_vehicles_to_allocate.value" class="form-control input-sm" ng-pattern="/^\d+$/" required />
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="!vm.settings.number_of_transport_vehicles_to_allocate.isEdit" ng-click="vm.settings.number_of_transport_vehicles_to_allocate.isEdit=true"><span translate>views.labels.edit</span></a>
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="vm.settings.number_of_transport_vehicles_to_allocate.isEdit" ng-click="vm.settingSave(vm.settings.number_of_transport_vehicles_to_allocate,ntvForm)"><span translate>v2.labels.save</span></a>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="list-group-item" tm-roles="['Admin','Manager','Dispatcher']">
+                        <form class="row" name="omsForm">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.immediate_send_threshold.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.immediate_send_threshold.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4" ng-if="!vm.settings.immediate_send_threshold.isEdit">
+                                <h5><a href="" class="text-uppercase text-info">{{vm.settings.immediate_send_threshold.value}}</a></h5>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 form-group" ng-if="vm.settings.immediate_send_threshold.isEdit" ng-class="{'has-error has-feedback': (omsForm.$submitted || omsForm.frNumber.$touched) && omsForm.frNumber.$invalid }">
+                                <input type="text" name="frNumber" ng-model="vm.settings.immediate_send_threshold.value" class="form-control input-sm" required />
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="!vm.settings.immediate_send_threshold.isEdit" ng-click="vm.settings.immediate_send_threshold.isEdit=true"><span translate>views.labels.edit</span></a>
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="vm.settings.immediate_send_threshold.isEdit" ng-click="vm.settingSave(vm.settings.immediate_send_threshold,omsForm)"><span translate>v2.labels.save</span></a>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="list-group-item" tm-roles="['Admin','Manager','Dispatcher']">
+                        <form class="row" name="frtForm">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.timeout_first_response_allocation.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.timeout_first_response_allocation.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4" ng-if="!vm.settings.timeout_first_response_allocation.isEdit">
+                                <h5><a href="" class="text-info">{{vm.settings.timeout_first_response_allocation.value}}</a></h5>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 form-group" ng-if="vm.settings.timeout_first_response_allocation.isEdit" ng-class="{'has-error has-feedback': (frtForm.$submitted || frtForm.frtNumber.$touched) && frtForm.frtNumber.$invalid }">
+                                <input type="text" name="frtNumber" ng-model="vm.settings.timeout_first_response_allocation.value" class="form-control input-sm" ng-pattern="/^\d+$/" required />
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="!vm.settings.timeout_first_response_allocation.isEdit" ng-click="vm.settings.timeout_first_response_allocation.isEdit=true"><span translate>views.labels.edit</span></a>
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="vm.settings.timeout_first_response_allocation.isEdit" ng-click="vm.settingSave(vm.settings.timeout_first_response_allocation,frtForm)"><span translate>v2.labels.save</span></a>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="list-group-item" tm-roles="['Admin','Manager','Dispatcher']">
+                        <form class="row" name="omsForm">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.timeout_final_first_response_allocation.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.timeout_final_first_response_allocation.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4" ng-if="!vm.settings.timeout_final_first_response_allocation.isEdit">
+                                <h5><a href="" class="text-uppercase text-info">{{vm.settings. timeout_final_first_response_allocation .value}}</a></h5>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 form-group" ng-if="vm.settings.timeout_final_first_response_allocation.isEdit" ng-class="{'has-error has-feedback': (omsForm.$submitted || omsForm.frNumber.$touched) && omsForm.frNumber.$invalid }">
+                                <input type="text" name="frNumber" ng-model="vm.settings.timeout_final_first_response_allocation.value" class="form-control input-sm" required />
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="!vm.settings.timeout_final_first_response_allocation.isEdit" ng-click="vm.settings.timeout_final_first_response_allocation.isEdit=true"><span translate>views.labels.edit</span></a>
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="vm.settings.timeout_final_first_response_allocation.isEdit" ng-click="vm.settingSave(vm.settings.timeout_final_first_response_allocation,omsForm)"><span translate>v2.labels.save</span></a>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="list-group-item" tm-roles="['Admin','Manager']">
+                        <form class="row" name="utcOffsetForm">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.utc_offset.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.utc_offset.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4" ng-if="!vm.settings.utc_offset.isEdit">
+                                <h5><a href="" class="text-uppercase text-info">{{vm.settings.utc_offset.value}}</a></h5>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 form-group" ng-if="vm.settings.utc_offset.isEdit" ng-class="{'has-error has-feedback': (utcOffsetForm.$submitted || utcOffsetForm.frNumber.$touched) && utcOffsetForm.frNumber.$invalid }">
+                                <input type="text" name="frNumber" ng-model="vm.settings.utc_offset.value" class="form-control input-sm" required />
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="!vm.settings.utc_offset.isEdit" ng-click="vm.settings.utc_offset.isEdit=true"><span translate>views.labels.edit</span></a>
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="vm.settings.utc_offset.isEdit" ng-click="vm.settingSave(vm.settings.utc_offset,utcOffsetForm)"><span translate>v2.labels.save</span></a>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="list-group-item" tm-roles="['Admin','Manager']">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.is_white_list_enabled.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.is_white_list_enabled.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="vm.settings.is_white_list_enabled.value" value="true" />
+                                </label>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-click="vm.settingSave(vm.settings.is_white_list_enabled)"> <span translate>v2.labels.save</span></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" tm-roles="['Admin','Manager']">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.is_data_center_on.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.is_data_center_on.label</span></h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="vm.settings.is_data_center_on.value" value="true" />
+                                </label>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-click="vm.settingSave(vm.settings.is_data_center_on)"> <span translate>v2.labels.save</span></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" tm-roles="['Admin','Manager','Dispatcher']">
+                        <form class="row" name="omsForm">
+                            <div class="col-xs-12 col-sm-6">
+                                <h5 class="hidden-xs"><span translate>settings.outgoing_message_server.label</span>:</h5>
+                                <h3 class="visible-xs"><span translate>settings.outgoing_message_server.label</span>:</h3>
+                            </div>
+                            <div class="col-xs-8 col-sm-4" ng-if="!vm.settings.outgoing_message_server.isEdit">
+                                <h5><a href="" class="text-uppercase text-info">{{vm.settings.outgoing_message_server.value}}</a></h5>
+                            </div>
+                            <div class="col-xs-8 col-sm-4 form-group" ng-if="vm.settings.outgoing_message_server.isEdit" ng-class="{'has-error has-feedback': (omsForm.$submitted || omsForm.frNumber.$touched) && omsForm.frNumber.$invalid }">
+                                <input type="text" name="frNumber" ng-model="vm.settings.outgoing_message_server.value" class="form-control input-sm" required />
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="!vm.settings.outgoing_message_server.isEdit" ng-click="vm.settings.outgoing_message_server.isEdit=true"><span translate>views.labels.edit</span></a>
+                                <a class="btn btn-sm btn-primary btn-normal pull-right" ng-if="vm.settings.outgoing_message_server.isEdit" ng-click="vm.settingSave(vm.settings.outgoing_message_server,omsForm)"><span translate>v2.labels.save</span></a>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="panel panel-default">
+            <div class="panel-heading beacon-panel text-uppercase"><h4><strong translate>v2.resources.additional_configuration</strong></h4></div>
+            <ul class="list-group">
+                <li class="list-group-item text-center addConfListLinks">
+                    <div ng-include="'app/views/additionalConfig.html'"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading beacon-panel text-uppercase"><h4><strong translate> settings.config_settings</strong></h4></div>
+            <ul class="list-group">
+                <li class="list-group-item text-center addConfListLinks">
+                    <a ui-sref="main.userListing" class="text-uppercase" tm-roles="['Admin']">
+                        <span translate>views.manage_resource_link.user</span>
+                    </a>
+                    <a ui-sref="main.dataCenterListing" class="text-uppercase" tm-roles="['Admin','Manager']">
+                        <span translate>views.manage_resource_link.data_center</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,112 @@
+﻿<div class="clearfix">
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-grey">
+            <div class="panel-heading beacon-panel"><h4 class="pull-left"><strong translate>views.user.listing</strong></h4><div class="clearfix"></div></div>
+
+            <div class="panel-body">
+                <div class="well well-sm" tm-roles="['Admin','Manager']">
+                    <h3 translate>v2.users.edit_user</h3>
+                    <hr />
+                    <form name="editUserForm" ng-submit="" class="form-horizontal">
+                        <div class="form-group" ng-class="{'has-error has-feedback': (editUserForm.$submitted || editUserForm.userRole.$touched) && editUserForm.userRole.$invalid }">
+                            <label class="col-sm-2 hidden-sm hidden-xs control-label"></label>
+                            <div class="col-sm-10">
+                                <div class="radio col-lg-3">
+                                    <label>
+                                        <input type="radio" name="userRole" ng-model="vm.user.user_role_id" value="1" required> <span class="text-uppercase" translate>views.user.admin</span>
+                                    </label>
+                                </div>
+                                <div class="radio col-lg-3">
+                                    <label>
+                                        <input type="radio" name="userRole" ng-model="vm.user.user_role_id" value="2" required> <span class="text-uppercase" translate>v2.users.manager</span>
+                                    </label>
+                                </div>
+                                <div class="radio col-lg-3">
+                                    <label>
+                                        <input type="radio" name="userRole" ng-model="vm.user.user_role_id" value="3" required> <span class="text-uppercase" translate>v2.users.dispatcher</span>
+                                    </label>
+                                </div>
+                                <div class="radio col-lg-3">
+                                    <label>
+                                        <input type="radio" name="userRole" ng-model="vm.user.user_role_id" value="4" required> <span class="text-uppercase" translate>v2.users.supervisor</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error has-feedback': (editUserForm.$submitted || editUserForm.txtName.$touched) && editUserForm.txtName.$invalid }">
+                            <label class="col-sm-2 control-label text-uppercase"><span translate>activerecord.attributes.user.username</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtName" class="form-control input-sm" placeholder="Name" ng-model="vm.user.username" required>
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error has-feedback': (editUserForm.$submitted || editUserForm.datacenter.$touched) && editUserForm.datacenter.$invalid }">
+                            <label class="col-sm-2 control-label text-uppercase"><span translate>activerecord.attributes.user.data_center</span></label>
+                            <div class="col-sm-10">
+                                <select class="form-control emergencyType input-sm" name="datacenter" id="datacenter" ng-model="vm.user.data_center_id" ng-options="dc.id as dc.name for dc in vm.datacenters" required>
+                                    <option value="" translate>activerecord.attributes.user.data_center</option>
+                                </select>
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error has-feedback': (editUserForm.$submitted || editUserForm.password.$touched) && editUserForm.password.$invalid }">
+                            <label class="col-sm-2 control-label text-uppercase"><span translate>activerecord.attributes.user.password</span></label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control input-sm" name="password" placeholder="password" ng-model="vm.user.password">
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error has-feedback': (editUserForm.$submitted || editUserForm.confirmPassword.$touched) && editUserForm.confirmPassword.$invalid }">
+                            <label class="col-sm-2 control-label text-uppercase"><span translate>activerecord.attributes.user.password_confirmation</span></label>
+                            <div class="col-sm-10">
+                                <input type="Password" name="confirmPassword" class="form-control input-sm" placeholder="" ng-model="vm.user.password_confirmation" compare-to="vm.user.password">
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error has-feedback': (editUserForm.$submitted || editUserForm.userLang.$touched) && editUserForm.userLang.$invalid }">
+                            <label class="col-sm-2 control-label text-uppercase"><span translate>activerecord.attributes.user.locale</span></label>
+                            <div class="col-sm-10">
+                                <div class="radio col-xs-3">
+                                    <label>
+                                        <input type="radio" name="userLang" ng-model="vm.user.locale" value="en" required> EN
+                                    </label>
+                                </div>
+                                <div class="radio col-xs-3">
+                                    <label>
+                                        <input type="radio" name="userLang" ng-model="vm.user.locale" value="es" required> ES
+                                    </label>
+                                </div>
+                                <div class="radio col-xs-3">
+                                    <label>
+                                        <input type="radio" name="userLang" ng-model="vm.user.locale" value="ht" required> HT
+                                    </label>
+                                </div>
+                                <div class="radio col-xs-3">
+                                    <label>
+                                        <input type="radio" name="userLang" ng-model="vm.user.locale" value="sw" required> SW
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="vm.user.user_role_id === 1">
+                            <div class="col-sm-10 col-xs-12 pull-right text-info">
+                                <b translate>views.user.permissions.is_admin</b>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="vm.user.user_role_id > 1">
+                            <div ng-repeat="dc in vm.datacenters" class="col-lg-2 col-md-3 col-xs-6">
+                                <input type="checkbox" checkbox-group /> <label>{{dc.name}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button id="btnCreate" class="btn btn-sm btn-primary btn-fullradius" formnovalidate ng-click="vm.userSave(editUserForm)"><span translate>v2.labels.save</span></button>
+                                <button id="btnCancel" class="btn btn-sm btn-primary btn-fullradius" ui-sref="^" translate>views.incident.cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

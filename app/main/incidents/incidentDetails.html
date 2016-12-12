@@ -1,0 +1,139 @@
+﻿<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default panel-grey">
+            <div class="panel-heading beacon-panel"><h4 class="pull-left text-uppercase"><strong translate>views.incident.details</strong></h4><span class="pull-right"><a ui-sref="^.newIncident" class="btn btn-sm btn-danger" translate>views.incident.new</a></span><div class="clearfix"></div></div>
+            <div class="panel-body">
+                <incident incident="vm.incident"></incident>
+                <ul class="list-group">
+                    <li class="list-group-item clearfix">
+                        <form class="col-lg-12 form-horizontal">
+                            <div class="row">
+                                <div class="col-lg-12"><h4 class="text-center text-uppercase"><label translate>activerecord.attributes.incident.comment</label></h4></div>
+                                <div class="input-group">
+                                    <textarea class="form-control" rows="1" ng-model="vm.incident.comment"  style="height:41px;resize: none;"></textarea>
+                                    <span class="input-group-addon" style="padding:0;border:0;">
+                                        <button ng-click="vm.updateComment()" class="btn btn-default" translate style="height:41px;margin-left:3px">v2.incident_cancellation.enter</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default panel-grey">
+            <div class="panel-heading beacon-panel"><h4><strong translate>activerecord.models.message_log.one</strong></h4></div>
+            <div class="panel-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><h4 class="text-uppercase"><strong translate>v2.message_log.requests_for_assistance</strong></h4></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="pull-left text-uppercase"><strong translate>v2.message_log.total_sent</strong>:&nbsp;</span>
+                                <span class="pull-right"> {{vm.incident.metrics.request_for_assistance_count}} </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="pull-left" translate>v2.message_log.ontime_replies</span>:
+                                <span class="pull-right"> {{vm.incident.metrics.request_for_assistance_reply_count}} </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="pull-left" translate>v2.message_log.late_replies</span>:
+                                <span class="pull-right"> {{vm.incident.metrics.request_for_assistance_late_reply_count}} </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="well well-sm">
+                    <h4 class="text-uppercase text-center"><strong translate>v2.message_log.resources_confirmed</strong></h4>
+                    <hr/>
+                    <ul class="nav" role="tablist">
+                        <li role="presentation" class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><h1 class="text-center"><!--<i class="fa fa-user text-primary"></i>--><div class="icon iconBig icon-userBlue"></div> <strong>: {{vm.incident.metrics.confirmed_no_vehicle_count}}</strong></h1></li>
+                        <li role="presentation" class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><h1 class="text-center"><!--<i class="fa fa-motorcycle text-primary"></i>--><div class="icon iconBig icon-BikeBlue"></div> <strong>: {{vm.incident.metrics.confirmed_non_transport_vehicle_count}}</strong></h1></li>
+                        <li role="presentation" class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><h1 class="text-center"><!--<i class="icon icon-info resConfirmed"></i>--><div class="icon iconBig icon-ambulanceBlue"></div> <strong>: {{vm.incident.metrics.confirmed_transport_vehicle_count}}</strong></h1></li>
+                    </ul>
+                </div>
+                <!--Time Line Show Hide-->
+
+                <div uib-collapse="vm.isCollapsed">
+                    <!--<div class="row">
+                        <div class="col-xs-6">
+                            <span translate>views.incident.request_for_assistance_table.request_message</span>
+                        </div>
+                    </div>-->
+                    <div class="row" ng-if="vm.currentMsg[0].resource">
+                        <first-responder first-responder="vm.currentMsg[0].resource" mode="i" hide-msg="vm.incident.state === 'incident_complete'"></first-responder>
+                    </div>
+                    <div class="well well-sm marginTop10">
+                        <ul class="timeline">
+                            <log-message ng-repeat="messageLog in vm.currentMsg" log-message="messageLog"></log-message>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="btn-actions">
+                    <div class="row">
+                        <div class="col-xs-4 text-left"><button type="button" ng-if="!vm.isCollapsed && vm.msgCounter > 0" ng-click="vm.movePreviousMsg()" class="btn btn-sm btn-link"><img src="../../../images/ic_arrow_back_white_24px.svg" /><!--<span class="glyphicon glyphicon-arrow-left"></span> <span translate>v2.dashboard.previous</span>--></button></div>
+                        <div class="col-xs-4 text-center"><button type="button" class="btn btn-primary btn-fullradius" ng-click="vm.showHide()"> {{vm.isCollapsed?'views.labels.show':'v2.incident_cancellation.hide' | translate}} <img src="../../../images/ic_arrow_drop_down_white_24px.svg" /></button></div>
+                        <div class="col-xs-4 text-right"><button type="button" ng-if="!vm.isCollapsed && vm.msgCounter < vm.iKeys.length-1 " ng-click="vm.moveNextMsg()" class="btn btn-sm btn-link"><img src="../../../images/ic_arrow_forward_white_24px.svg" /> <!--<span translate>v2.dashboard.next</span> <span class="glyphicon glyphicon-arrow-right"></span>--></button></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <button type="button" class="link btn-link" ng-click="vm.reloadMsg()">Back to Panel 1 </button>
+                            <p class="tab blink" style="color:green"><strong> {{vm.NewReplyRecevied}} </strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default panel-grey">
+            <div class="panel-heading beacon-panel"><h4><strong translate>views.incident.incident_messages_table.heading</strong></h4></div>
+            <div class="panel-body">
+			  <div class="row">
+                    <div class="col-xs-6 text-left"><button type="button" ng-if="vm.counter > 0" ng-click="vm.movePreviousLog()" class="btn btn-sm btn-link"><img src="../../../images/ic_arrow_back_white_24px.svg" /><!--<span class="glyphicon glyphicon-arrow-left"></span> <span translate>v2.dashboard.previous</span>--></button></div>
+                    <div class="col-xs-6 text-right"><button type="button" ng-if="vm.counter < vm.logKeys.length-1 " ng-click="vm.moveNextLog()" class="btn btn-sm btn-link"><img src="../../../images/ic_arrow_forward_white_24px.svg" /> <!--<span translate>v2.dashboard.next</span> <span class="glyphicon glyphicon-arrow-right"></span>--></button></div>
+                </div>
+                <div class="row" ng-if="!vm.currentLog[0].resource">                                         
+                    <div class="col-xs-12">
+                        <h5><span>{{vm.currentLog[0].created_at | datetime: vm.incident.utc_offset}}</span></h5>
+                    </div>
+                    <div class="col-xs-6">
+                        <h5>
+                            <span>{{vm.incident.reporting_party.resource_name?vm.incident.reporting_party.resource_name: vm.incident.reporting_party.resource_type }}</span>
+                         <span class="text-nowrap phNoIcon">(<ph-no phone-number="vm.incident.reporting_party.resource_phone_number"></ph-no>)</span>
+                        </h5>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <h5>
+                            <span>{{vm.currentLog[0].resource_name}}</span>
+                             <span class="text-nowrap phNoIcon">(<ph-no phone-number="vm.currentLog[0].resource_phone_number"></ph-no>)</span>
+                        </h5>
+                    </div>
+                </div>
+                <div class="row" ng-if="vm.currentLog[0].resource">
+                    <first-responder first-responder="vm.currentLog[0].resource" reporting-party="vm.incident.reporting_party" initiated-at="vm.currentLog[0].created_at" mode="i" hide-msg="vm.incident.state === 'incident_complete'"></first-responder>
+                </div>
+                <div class="well well-sm marginTop10">
+                    <ul class="timeline">
+                        <ul class="timeline">
+                            <log-message ng-repeat="messageLog in vm.currentLog" log-message="messageLog"></log-message>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="btn-actions">
+                    <div class="row">
+                        <div class="col-xs-6 text-left"><button type="button" ng-if="vm.counter > 0" ng-click="vm.movePreviousLog()" class="btn btn-sm btn-link"><img src="../../../images/ic_arrow_back_white_24px.svg" /><!--<span class="glyphicon glyphicon-arrow-left"></span> <span translate>v2.dashboard.previous</span>--></button></div>
+                        <div class="col-xs-6 text-right"><button type="button" ng-if="vm.counter < vm.logKeys.length-1 " ng-click="vm.moveNextLog()" class="btn btn-sm btn-link"><img src="../../../images/ic_arrow_forward_white_24px.svg" /> <!--<span translate>v2.dashboard.next</span> <span class="glyphicon glyphicon-arrow-right"></span>--></button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

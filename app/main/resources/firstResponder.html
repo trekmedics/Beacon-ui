@@ -1,0 +1,71 @@
+﻿<div class="row" ui-view>
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-grey">
+            <div class="panel-heading beacon-panel"><h4 class="pull-left text-uppercase"><strong translate>v2.first_responder.first_responder_list</strong></h4><div class="clearfix"></div></div>
+            <div class="panel-body">
+                <div class="well well-sm" tm-roles="['Admin','Manager']">
+                    <h3 translate class="text-uppercase text-center">v2.first_responder.add_first_responder</h3>
+                    <hr />
+                    <form name="addFirstResponderForm" class="form form-horizontal clearfix" ng-init="addFirstResponderForm.$pristine=true">
+                        <div class="form-group col-lg-6" ng-class="{'has-error has-feedback': (addFirstResponderForm.$submitted || addFirstResponderForm.txtName.$touched) && addFirstResponderForm.txtName.$invalid }">
+                            <label class="col-sm-4 control-label text-uppercase" translate>activerecord.attributes.first_responder.name</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="txtName" class="form-control input-sm" autocomplete="off" ng-model="vm.firstResponder.name" required>
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6" ng-class="{'has-error has-feedback': (addFirstResponderForm.$submitted || addFirstResponderForm.txtNumber.$touched) && addFirstResponderForm.txtNumber.$invalid }">
+                            <label class="col-sm-4 control-label text-uppercase" translate>activerecord.attributes.first_responder.phone_number</label>
+                            <div class="col-sm-8 text-right">
+                                <input type="text" name="txtNumber" class="form-control input-sm" ng-pattern="/\+\d{10,15}$/" autocomplete="off" ng-model="vm.firstResponder.phone_number" ng-change="vm.checkFr(addFirstResponderForm.txtNumber)" required>
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group col-lg-6" ng-class="{'has-error has-feedback': (addFirstResponderForm.$submitted || addFirstResponderForm.language.$touched) && addFirstResponderForm.language.$invalid }">
+                            <label class="col-xs-3 col-sm-4 control-label text-uppercase" style="padding-top:10px" translate>activerecord.attributes.first_responder.locale</label>
+                            <div class="col-xs-9 col-sm-8 addUserRadioGroup">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="language" ng-model="vm.firstResponder.locale" value="en" required> EN
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="language" ng-model="vm.firstResponder.locale" value="es" required> ES
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="language" ng-model="vm.firstResponder.locale" value="ht" required> HT
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="language" ng-model="vm.firstResponder.locale" value="sw" required>SW
+                                    </label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- CHECK BOX 2-->
+                        <div class="form-group col-lg-12" ng-class="{'has-error has-feedback': (addFirstResponderForm.$submitted || addFirstResponderForm.transportName.$touched) && addFirstResponderForm.transportName.$invalid }">
+                            <div class="col-xs-12 col-sm-2 text-xs-center">
+                                <label class="control-label text-uppercase"><span translate>activerecord.attributes.first_responder.transportation_mode</span>:</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-10 text-xs-center">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="transportName" ng-model="vm.firstResponder.transportation_mode" value="3"> <span class="text-uppercase" translate>v2.first_responder.patient </span>
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="transportName" ng-model="vm.firstResponder.transportation_mode" value="2"><span class="text-uppercase" translate>v2.first_responder.non_patient </span>
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="transportName" ng-model="vm.firstResponder.transportation_mode" value="1"><span class="text-uppercase" translate>v2.first_responder.non_motorized </span>
+                                    </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 btn-actions text-center">
+                            <button id="btnCreate" class="btn btn-sm btn-primary btn-fullradius" formnovalidate ng-click="vm.createFirstResponder(addFirstResponderForm)" translate>v2.labels.create</button>
+                        </div>
+                    </form>
+                </div>
+                <ul class="list-group">
+                    <first-responder first-responder="fr" ng-repeat="fr in vm.firstResponders" mode="l"></first-responder>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

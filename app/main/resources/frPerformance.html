@@ -1,0 +1,98 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-grey">
+            <div class="panel-heading beacon-panel">
+                <h4 class="text-uppercase" translate>v2.performance_report.performance_report</h4>
+            </div>
+            <div class="panel-body">
+                <div class="well well-sm">
+                    <h3 class="text-uppercase" translate>v2.first_responder.details</h3>
+                    <hr />
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="clearfix">
+                                <div class="row">
+                                    <div class="col-sm-4 col-xs-12" ng-class="vm.fr.style">
+                                        <h5 class="margin5"><strong translate>activerecord.attributes.first_responder.name</strong>: {{vm.perDetails.first_responder.name}}</h5>
+                                    </div>
+                                    <div class="col-sm-5 col-xs-12">
+                                        <h5 class="margin5"><strong translate>activerecord.attributes.first_responder.phone_number </strong>: {{vm.perDetails.first_responder.phone_number}}</h5>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-12">
+                                        <h5 class="margin5"><strong translate>activerecord.attributes.first_responder.locale</strong>:  {{vm.perDetails.first_responder.locale}}</h5>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-sm-4 col-xs-12">
+                                        <h5 class="margin5"><strong translate>activerecord.attributes.first_responder.transportation_mode</strong>: <i class="fa" ng-class="vm.fr.icon"></i></h5>
+                                    </div>
+                                    <div class="col-sm-5 col-xs-12">
+                                        <h5 class="margin5"><strong translate>activerecord.attributes.user.data_center</strong>: &nbsp; {{vm.fr.datacCenterName}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item hidden-xs hidden-sm">
+                        <div class="row  text-warning">
+                            <div class="col-md-3"><strong translate>v2.performance_report.heading.metric</strong></div>
+                            <div class="col-md-2"><strong translate>v2.performance_report.heading.value</strong></div>
+                            <div class="col-md-3"><strong translate>v2.performance_report.heading.percentage</strong></div>
+                            <div class="col-md-4"><strong translate>v2.performance_report.heading.description</strong></div>
+                        </div>
+                    </li>
+                    <fr-metric key="initial_alerts_sent" value="vm.perDetails.number_of_original_requests" percent="vm.perDetails.percentage_of_original_requests"></fr-metric>
+                    
+                    <fr-metric key="initial_alert_replies" value="vm.perDetails.number_of_original_request_replies" percent="vm.perDetails.percentage_of_original_request_replies"></fr-metric>
+                  
+                    <fr-metric key="initial_alert_no_replies" value="vm.perDetails.number_of_original_request_no_replies" percent="vm.perDetails.percentage_of_original_request_no_replies"></fr-metric>
+
+                    <fr-metric key="initial_alerts_confirm_time" value="vm.perDetails.average_original_confirm_time"></fr-metric>
+
+                    <fr-metric key="additional_alerts_sent" value="vm.perDetails.number_of_additional_requests"></fr-metric>
+
+                    <fr-metric key="additional_alert_replies" value="vm.perDetails.number_of_additional_request_replies" percent="vm.perDetails.percentage_of_additional_request_replies"></fr-metric>
+
+                    <fr-metric key="additional_alert_no_replies" value="vm.perDetails.number_of_additional_request_no_replies" percent="vm.perDetails.percentage_of_additional_request_no_replies"></fr-metric>
+
+                    <fr-metric key="additional_alerts_confirm_time" value="vm.perDetails.average_additional_confirm_time"></fr-metric>
+
+                    <fr-metric key="incidents_assigned" value="vm.perDetails.number_of_assigned_incidents" percent="vm.perDetails.percentage_of_assigned_incidents"></fr-metric>
+
+                    <fr-metric key="confirmed_on_scene" value="vm.perDetails.number_of_times_confirmed_on_scene" percent="vm.perDetails.percentage_of_confirmed_on_scene"></fr-metric>
+
+                    <fr-metric key="incident_commander_count" value="vm.perDetails.number_of_times_incident_commander" percent="vm.perDetails.percentage_of_times_incident_commander"></fr-metric>
+
+                    <fr-metric key="cancel_message_count" value="vm.perDetails.number_of_cancel_messages" percent="vm.perDetails.percentage_of_cancel_messages"></fr-metric>
+
+                    <fr-metric key="unable_to_locate_count" value="vm.perDetails.number_of_unable_to_locate_messages" percent="vm.perDetails.percentage_of_unable_to_locate_messages"></fr-metric>
+
+                    <fr-metric key="requested_additional_resources" value="vm.perDetails.number_of_times_resources_requested" percent="vm.perDetails.percentage_of_times_resources_requested"></fr-metric>
+
+                    <fr-metric key="total_vehicles_requested" value="vm.perDetails.total_number_of_vehicles_requested"></fr-metric>
+                    
+                    <fr-metric key="average_vehicles_requested" value="vm.perDetails.average_number_of_vehicles_requested"></fr-metric>
+                    
+                    <fr-metric key="confirmed_transport_to_hospital" value="vm.perDetails.number_of_times_transport_confirmed" percent="vm.perDetails.percentage_of_times_transport_confirmed"></fr-metric>
+                    
+                    <fr-metric key="total_patients_transported" value="vm.perDetails.total_number_of_patients_transported"></fr-metric>
+
+                    <fr-metric key="average_patients_transported" value="vm.perDetails.average_number_of_patients_transported"></fr-metric>
+  
+                    <fr-metric key="total_cancelled_after_on_scene" value="vm.perDetails.number_of_times_cancelled_after_on_scene" percent="vm.perDetails.percentage_of_times_cancelled_after_on_scene"></fr-metric>
+
+                    <fr-metric key="total_confirm_arrival_at_hospital" value="vm.perDetails.number_of_times_arrival_at_hospital_confirmed" percent="vm.perDetails.percentage_of_times_arrival_at_hospital_confirmed"></fr-metric>
+  
+                    <fr-metric key="average_transport_time" value="vm.perDetails.average_transport_time"></fr-metric>
+
+                    <fr-metric key="total_completed_incidents" value="vm.perDetails.number_of_incidents_completed" percent="vm.perDetails.percentage_of_incidents_completed"></fr-metric>
+
+                    <fr-metric key="average_length_complete_incident" value="vm.perDetails.average_completion_time"></fr-metric>
+                    
+</ul>
+            </div>
+        </div>
+    </div>
+</div>

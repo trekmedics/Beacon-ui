@@ -1,0 +1,127 @@
+﻿
+<div class="row" ui-view>
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-grey">
+            <div class="panel-heading beacon-panel"><h4 class="pull-left"><strong translate>views.user.listing</strong></h4><div class="clearfix"></div></div>
+
+            <div class="panel-body">
+                <div class="well well-sm" tm-roles="['Admin','Manager']">
+                    <h3 class="text-uppercase text-center" translate>v2.users.add_user</h3>
+                    <hr />
+                    <div class="clearfix">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <form name="addUserForm" class="form-horizontal">
+                                <div class="form-group" ng-class="{'has-error has-feedback': (addUserForm.$submitted || addUserForm.userRole.$touched) && addUserForm.userRole.$invalid }">
+                                    <label class="col-sm-3 control-label"></label>
+                                    <div class="col-xs-12 col-sm-9 addUserRadioGroup">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="userRole" ng-model="vm.newUser.user_role_id" value="1" required> <span class="text-uppercase" translate>views.user.admin</span>
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="userRole" ng-model="vm.newUser.user_role_id" value="2" required> <span class="text-uppercase" translate>v2.users.manager</span>
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="userRole" ng-model="vm.newUser.user_role_id" value="3" required> <span class="text-uppercase" translate>v2.users.dispatcher</span>
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="userRole" ng-model="vm.newUser.user_role_id" value="4" required> <span class="text-uppercase" translate>v2.users.supervisor</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error has-feedback': (addUserForm.$submitted || addUserForm.txtName.$touched) && addUserForm.txtName.$invalid }">
+                                    <label class="col-sm-4 control-label text-uppercase"><span translate>activerecord.attributes.user.username</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="txtName" class="form-control input-sm" placeholder="{{'activerecord.attributes.user.username' | translate}}" ng-model="vm.newUser.username" required>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error has-feedback': (addUserForm.$submitted || addUserForm.datacenter.$touched) && addUserForm.datacenter.$invalid }">
+                                    <label class="col-sm-4 control-label text-uppercase"><span translate>activerecord.attributes.user.data_center</span></label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control emergencyType input-sm" name="datacenter" id="datacenter" ng-model="vm.newUser.datacenter" ng-options="item as item.name for item in vm.datacenters track by item.id" required>
+                                            <option value="" translate>activerecord.attributes.user.data_center</option>
+                                        </select>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error has-feedback': (addUserForm.$submitted || addUserForm.password.$touched) && addUserForm.password.$invalid }">
+                                    <label class="col-sm-4 control-label text-uppercase"><span translate>activerecord.attributes.user.password</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control input-sm" name="password" placeholder="{{'activerecord.attributes.user.password' | translate}}" ng-model="vm.newUser.password" required>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error has-feedback': (addUserForm.$submitted || addUserForm.confirmPassword.$touched) && addUserForm.confirmPassword.$invalid }">
+                                    <label class="col-sm-4 control-label text-uppercase"><span translate>activerecord.attributes.user.password_confirmation</span></label>
+                                    <div class="col-sm-8">
+                                        <input type="Password" name="confirmPassword" class="form-control input-sm" placeholder="" ng-model="vm.newUser.password_confirmation" compare-to="vm.newUser.password" required>
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error has-feedback': (addUserForm.$submitted || addUserForm.userLang.$touched) && addUserForm.userLang.$invalid }">
+                                    <label class="col-xs-4 control-label text-uppercase" style="padding-top:10px"><span translate>activerecord.attributes.user.locale</span>:</label>
+                                    <div class="col-xs-8 addUserRadioGroup">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="userLang" ng-model="vm.newUser.locale" value="en" required> EN
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="userLang" ng-model="vm.newUser.locale" value="es" required> ES
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="userLang" ng-model="vm.newUser.locale" value="ht" required> HT
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="userLang" ng-model="vm.newUser.locale" value="sw" required> SW
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10 text-center">
+                                        <button id="btnCreate" class="btn btn-sm btn-primary btn-fullradius" formnovalidate ng-click="vm.createUser(addUserForm)"><span translate>v2.labels.create</span></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </div>
+                <!-- table-->
+                <ul class="list-group userListingGroup" ng-repeat="user in vm.users">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-8"><b style="font-size:medium"><span translate>activerecord.attributes.user.username</span>: {{user.username}}</b></div>
+                            <div class="col-xs-4 text-right">
+                                <div class="btn-group" role="group" aria-label="adminEdit" tm-roles="['Admin','Manager']">
+                                    <a class="link btn-link" ui-sref=".edit({id:user.id})"><span translate>views.labels.edit</span></a>
+                                    <!--<a class="btn btn-default" ng-if="user.isEdit" ng-click="vm.userSave(user)"><i class="fa fa-save"></i> <span translate class="hidden-sm hidden-xs">v2.labels.save</span></a>-->
+                                    <span class="link-seperator"></span>
+                                    <a class="link btn-link" ng-click="vm.userRemove(user)" confirm-obj="user"><span translate>views.labels.destroy</span></a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-6" translate>{{vm.getRoleNameById(user.user_role_id)}} </div>
+                            <div class="col-sm-3 col-xs-6 text-xs-right"><span translate>activerecord.attributes.user.data_center</span>: {{vm.dataCenterGetById(user.data_center_id).name}}</div>
+                            <div class="col-sm-3 col-xs-6"><span translate>v2.users.test_sim</span><span class="text-uppercase">: Sim</span></div>
+                            <div class="col-sm-3 col-xs-6 text-xs-right"><span translate>activerecord.attributes.user.locale</span><span class="text-uppercase">: {{user.locale}}</span></div>
+                            <!--<div class="col-xs-12 hidden visible-xs">
+                                <span translate>{{vm.getRoleNameById(user.user_role_id)}}</span>
+                                <span class="link-seperator"></span>
+                                <span><span translate>activerecord.attributes.user.data_center</span>: {{vm.dataCenterGetById(user.data_center_id).name}}</span>
+                                <span class="link-seperator"></span>
+                                <span><span translate>v2.users.test_sim</span><span class="text-uppercase">: Sim</span></span>
+                                <span class="link-seperator"></span>
+                                <span><span translate>activerecord.attributes.user.locale</span><span class="text-uppercase">: {{user.locale}}</span></span>
+                            </div>-->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

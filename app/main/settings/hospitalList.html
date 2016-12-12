@@ -1,0 +1,110 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-grey">
+            <div class="panel-heading beacon-panel"><h4 class="pull-left text-uppercase"><strong translate>views.hospital.listing</strong></h4><a id="aSettings" ui-sref="main.settings" class="btn btn-sm btn-default pull-right"><i class="fa fa-cog"></i> <span translate>activerecord.models.setting.other</span></a><div class="clearfix"></div></div>
+            <div class="panel-body">
+                <div class="well well-sm" tm-roles="['Admin','Manager']">
+                    <h3 class="text-uppercase text-center"><span translate>v2.hospitals_list.add_hospitals</span></h3>
+                    <hr />
+                    <form name="addHospitalForm" class="form form-horizontal clearfix">
+                        <div class="form-group col-lg-5" ng-class="{'has-error has-feedback': (addHospitalForm.$submitted || addHospitalForm.txtName.$touched) && addHospitalForm.txtName.$invalid }">
+                            <label class="col-sm-2 control-label text-uppercase"><span translate>activerecord.attributes.hospital.name</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" id="txtName" name="txtName" class="form-control input-sm" placeholder="{{'activerecord.attributes.hospital.name' | translate}}" ng-model="vm.hospital.name" autocomplete="off" required>
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-5" ng-class="{'has-error has-feedback': (addHospitalForm.$submitted || addHospitalForm.txtAddress.$touched) && addHospitalForm.txtAddress.$invalid }">
+                            <label class="col-sm-2 control-label text-uppercase"><span translate>v2.hospitals_list.address</span></label>
+                            <div class="col-sm-9 text-right">
+                                <input id="txtPhNo" name="txtAddress" type="text" class="form-control input-sm" placeholder="{{'v2.hospitals_list.address' | translate}}" ng-model="vm.hospital.address" autocomplete="off" required>
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-2 col-md-offset-2 col-lg-2 col-md-offset-0 text-center">
+                            <button class="btn btn-sm btn-primary btn-fullradius" id="btnCreate" formnovalidate ng-click="vm.createHospital(addHospitalForm)" translate>v2.labels.create</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- table-->
+                <ul class="list-group fa-border" ng-repeat="hspl in vm.UI.hospitals" scroll-if="vm.UI.id===hspl.id">
+                    <li class="list-group-item">
+                        <form name="editHSPL{{hspl.id}}">
+                            <div class="row">
+                                <div class="col-xs-5" ng-if="!hspl.isEdit">
+                                    <span class="hidden-xs">{{hspl.name}}</span><h4 class="visible-xs"><strong>{{hspl.name}}</strong></h4>
+                                </div>
+                                <!--<div class="col-sm-4 col-xs-12" ng-if="!hspl.isEdit">
+                                   <span class="hidden-xs">{{hspl.address}}</span><h3 class="visible-xs">{{hspl.address}}</h3>
+                                </div>-->
+                                
+
+                                <div class="col-xs-12 col-sm-7 form-inline" ng-if="hspl.isEdit" tm-roles="['Admin','Manager']">
+                                    
+                                        <div class="col-lg-6 form-group" ng-class="{'has-error has-feedback': (editHSPL{{hspl.id}}.$submitted|| editHSPL{{hspl.id}}.hName.$touched) && editHSPL{{hspl.id}}.hName.$invalid }">
+                                            <input class="form-control input-sm" type="text" name="hName" ng-model="hspl.name" autocomplete="off" required />
+                                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        </div>
+                                        <div class="col-lg-6 form-group" ng-class="{'has-error has-feedback': (editHSPL{{hspl.id}}.$submitted || editHSPL{{hspl.id}}.txtAddress.$touched) && editHSPL{{hspl.id}}.txtAddress.$invalid }">
+                                            <input class="form-control input-sm" type="text" name="txtAddress" ng-model="hspl.address" autocomplete="off" required />
+                                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                        </div>
+                                    
+                                </div>
+                                <div class="col-xs-3" tm-roles="['Admin','Manager','Dispatcher']">
+                                    <button class="btn btn-xs btn-changes" style="margin-top:5px;" ng-click="vm.doctorAdd(hspl.id)" translate>
+                                        views.hospital.new_medical_doctor
+                                    </button>
+                                </div>
+                                <div class="col-xs-4 pull-right">
+                                    <div class="pull-right" style="margin-top:5px;" role="group" aria-label="adminEdit">
+                                        <a class="link btn-link" onclick="return false;" ng-if=!hspl.isEdit ng-click="hspl.isEdit=true" tm-roles="['Admin','Manager']"><span translate>views.labels.edit</span></a>
+                                        <a class="link btn-link" ng-if="hspl.isEdit" ng-click="vm.hospitalSave(hspl,editHSPL{{hspl.id}})" tm-roles="['Admin','Manager']"><span translate>v2.labels.save</span></a>
+                                        <span class="link-seperator"></span>
+                                        <a class="link btn-link" ng-if="hspl.id" ng-click="vm.hospitalRemove(hspl)" confirm-obj="hspl" tm-roles="['Admin','Manager']"> <span translate>views.labels.destroy</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+</li>
+                    <li class="list-group-item" ng-repeat="doctor in vm.getDoctors(hspl.id)">
+                        <form name="editDOCTOR{{hspl.id}}{{doctor.id}}">
+                            <ul class="list-unstyled list-grid">
+                                <li class="clearfix">
+                                    <div class="col-sm-6 col-xs-12 form-group" ng-if="doctor.isEdit" ng-class="{'has-error has-feedback': (editDOCTOR{{hspl.id}}{{doctor.id}}.$submitted|| editDOCTOR{{hspl.id}}{{doctor.id}}.dName.$touched) && editDOCTOR{{hspl.id}}{{doctor.id}}.dName.$invalid }">
+                                        <input type="text" placeholder="{{'activerecord.attributes.administrator.name' | translate}}" name="dName" class="form-control input-sm" ng-model="doctor.name" autocomplete="off" required />
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-12 form-group" ng-if="doctor.isEdit" ng-class="{'has-error has-feedback': (editDOCTOR{{hspl.id}}{{doctor.id}}.$submitted|| editDOCTOR{{hspl.id}}{{doctor.id}}.dPhno.$touched) && editDOCTOR{{hspl.id}}{{doctor.id}}.dPhno.$invalid }">
+                                        <input type="text" placeholder="{{'activerecord.attributes.administrator.phone_number' | translate}}" name="dPhno" ng-pattern="/\+\d{10,15}$/" class="form-control input-sm" ng-model="doctor.phone_number" autocomplete="off" required />
+                                        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-md-5" ng-if="!doctor.isEdit">
+                                            <span class="glyphicon glyphicon-triangle-right"></span>
+                                            <span class="hidden-xs"> {{doctor.name}}</span>
+                                            <h4 class="visible-xs-inline"> {{doctor.name}}</h4>
+                                        </div>
+                                        <div class="col-xs-3" ng-if="!doctor.isEdit">
+                                            <ph-no phone-number="doctor.phone_number" class="phListNoIcon"></ph-no>
+                                        </div>
+                                        <div class="col-xs-4 pull-right">
+                                            <div class="pull-right" role="group" aria-label="adminEdit" tm-roles="['Admin','Manager','Dispatcher']">
+                                                <a class="link btn-link" ng-if="!doctor.isEdit" ng-click="doctor.isEdit=true"><span translate>views.labels.edit</span></a>
+                                                <a class="link btn-link" ng-if="doctor.isEdit" ng-click="vm.doctorSave(doctor,editDOCTOR{{hspl.id}}{{doctor.id}})"><span translate>v2.labels.save</span></a>
+                                                <span class="link-seperator"></span>
+                                                <a class="link btn-link" ng-if="doctor.id" ng-click="vm.doctorRemove(doctor)" confirm-obj="doctor" tm-roles="['Admin','Manager']"><span translate>views.labels.destroy</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

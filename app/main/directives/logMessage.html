@@ -1,0 +1,14 @@
+﻿<li ng-class="logMessage.is_incoming ? 'timeline-inverted':''">
+    <div class="timeline-badge"><i class="fa fa-dot-circle-o" ng-class="logMessage.is_incoming?'text-warning':'text-info'"></i></div>
+    <div class="timeline-panel">
+        <div class="timeline-heading">
+            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{logMessage.created_at | datetime: logMessage.utc_offset}}</small></p>
+        </div>
+        <div class="timeline-body">
+            <p>
+                <div ng-class="{'text-uppercase text-info':$first}" ng-repeat="message in getMessages()">{{message}}</div>
+            </p>
+        </div>
+    </div>
+</li>
+

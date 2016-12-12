@@ -1,0 +1,5 @@
+curl http://localhost:8081?user[username]=testadmin&user[password]=userpw
+
+curl -X POST --data "user[username]=admin&user[password]=Password1" http://localhost:5000/api/v2/users/sessions/
+
+

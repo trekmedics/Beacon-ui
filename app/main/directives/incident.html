@@ -1,0 +1,56 @@
+﻿
+<ul class="list-group">
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-xs-2">
+                <h3 class="link" ui-sref="main.incidentDetails({id:incident.id})"><span class="label" ng-class="vm.isCompleted()?'label-primary label-close':'label-warning label-new'">{{incident.id}}</span></h3>
+            </div>
+            <div class="col-xs-8">
+                <h5 class="margin5"><strong>{{incident.location}}</strong><br />{{incident.created_at | datetime: incident.utc_offset}}</h5>
+            </div>
+            <div  class="col-xs-2" ng-if="!vm.isCompleted()">
+                <a class="btn btn-sm btn-danger pull-right margin5" style="margin-right:0" ng-click="vm.cancelIncident()" translate>views.incident.cancel</a>
+            </div>
+        </div>
+        <div class="row link" ui-sref="main.incidentDetails({id:incident.id})">
+            <div class="col-md-3 col-xs-12">
+                <h4 class="text-uppercase"><span translate>v2.incidents.status</span>:</h4>
+            </div>
+            <div class="col-xs-8 col-md-6">
+                <h4 class="text-danger text-uppercase"><strong>{{vm.state}}</strong></h4>
+            </div>
+            <div class="col-xs-4 col-md-3">
+                <h4 class="text-right">AT {{incident.updated_at | time: incident.utc_offset}}</h4>
+            </div>
+        </div>
+        <div class="row" ng-if="vm.isCompleted()">
+            <div class="col-lg-5 col-md-5 col-sm-4 col-xs-6">
+                <h4 translate class="text-uppercase"> activerecord.attributes.incident.completion_status</h4>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">
+                <h4 class="text-danger text-uppercase"><strong>{{vm.completionState}}</strong></h4>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item clearfix">
+        <span class="pull-left"><span translate>v2.incidents.emergency_type</span><span>:</span></span>
+        <span class="pull-right"> {{incident.subcategory_string}}</span>
+    </li>
+    <li class="list-group-item clearfix">
+        <span class="pull-left"><span translate>activerecord.attributes.incident.incident_commander</span><span>:</span></span>
+        <span class="pull-right">{{incident.incident_commander.name}}</span>
+    </li>
+    <li class="list-group-item clearfix">
+        <span class="pull-left"><span translate>v2.incidents.dispatcher_number</span><span>:</span></span>
+        <ph-no class="pull-right" phone-number=incident.reporting_party.phone_number></ph-no>
+    </li>
+    <li class="list-group-item clearfix">
+        <span class="pull-left"><span translate>activerecord.attributes.incident.report</span><span>:</span></span>
+        <span class="pull-right">
+          <a href="https://dispatch.trekmedics.org/incident_reports/incident_report_{{incident.id}}.xlsx">
+            incident_report_{{incident.id}}.xlsx
+          </a>
+        </span>
+      </li>
+
+</ul>

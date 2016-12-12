@@ -1,0 +1,127 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading beacon-panel text-uppercase"><h4><strong translate>v2.new_incident.new_incidents</strong></h4></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <form name="addIncidentForm" class="col-lg-6 col-sm-12">
+                <p class="text-center"><span class="text-danger text-uppercase">*</span><span class="text-uppercase" translate>v2.new_incident.required_text_fields</span></p>
+                <div class="form-horizontal">
+                    <div class="form-group" ng-class="{'has-error has-feedback': (addIncidentForm.$submitted || addIncidentForm.txtDispName.$touched) && addIncidentForm.txtDispName.$invalid }">
+                        <label for="dispatcherName" class="col-sm-3 control-label"><span class="text-danger text-uppercase">*</span> <span class="text-uppercase" translate>v2.new_incident.dispatcher_name</span></label>
+                        <div class="col-sm-8">
+                            <input id="txtDispName" name="txtDispName" type="text" class="form-control" placeholder="{{'v2.new_incident.dispatcher_name' | translate}}" ng-model="vm.incident.dispatcherName" required autocomplete="off">
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error has-feedback': (addIncidentForm.$submitted || addIncidentForm.txtLocation.$touched) && addIncidentForm.txtLocation.$invalid }">
+                        <label for="location" class="col-sm-3 control-label"><span class="text-danger text-uppercase">*</span> <span class="text-uppercase" translate>activerecord.attributes.incident.location</span></label>
+                        <div class="col-sm-8">
+                            <input id="txtLocation" name="txtLocation" type="text" class="form-control" placeholder="{{'activerecord.attributes.incident.location' | translate}}" ng-model="vm.incident.location" required autocomplete="off">
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="well well-sm">
+                    <!--<fieldset class="row">
+                        <legend align="center" class="marginBottom0"><span class="text-danger">*</span><span translate> v2.new_incident.allocation</span></legend>
+                        <div class="well well-sm">
+                            <div class="row">
+                                <div class="col-xs-6">sdf</div>
+                                <div class="col-xs-6">sdf</div>
+                            </div>
+                        </div>
+                    </fieldset>-->
+                    <h3 class="text-uppercase text-center"><span class="text-danger">*</span><span translate> v2.new_incident.allocation</span></h3>
+                    <hr />
+                    <div class="row">
+                        <div class="col-xs-6 text-center">
+                            <h4 class="text-uppercase">Responders</h4>
+                            <div class="form-inline text-center">
+                                <div class="form-group input-group" ng-class="{'has-error has-feedback': (addIncidentForm.$submitted || addIncidentForm.txtFrs.$touched) && addIncidentForm.txtFrs.$invalid }">
+                                    <div class="input-group-addon transparent"><!--<i class="fa fa-user text-info"></i>--><div class="icon icon-userBlue"></div> </div>
+                                    <input id="txtFrs" name="txtFrs" type="number" class="form-control" ng-model="vm.incident.frsToAllocate" min="1" required autocomplete="off" style="width:50px; border-radius:0">
+                                    <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 text-center">
+                            <h4 class="text-uppercase">Vehicles</h4>
+                            <div class="form-inline text-center">
+                                <div class="form-group input-group" ng-class="{'has-error has-feedback': (addIncidentForm.$submitted || addIncidentForm.txtVehicles.$touched) && addIncidentForm.txtVehicles.$invalid }">
+                                    <div class="input-group-addon transparent"><!--<i class="icon icon-default icon-inputgroup"></i>--><div class="icon icon-ambulanceBlue"></div> </div>
+                                    <input id="txtVehicles" name="txtVehicles" type="number" class="form-control" ng-model="vm.incident.vehiclesToAllocate" required max="{{vm.incident.frsToAllocate}}" min="0" autocomplete="off" style="width:50px; border-radius:0">
+                                    <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="form-inline text-center">
+                        <div class="form-group input-group" ng-class="{'has-error has-feedback': (addIncidentForm.$submitted || addIncidentForm.txtFrs.$touched) && addIncidentForm.txtFrs.$invalid }">
+                            <div class="input-group-addon info"><i class="fa fa-user"></i> </div>
+                            <input id="txtFrs" name="txtFrs" type="number" class="form-control" placeholder="Responders" ng-model="vm.incident.frsToAllocate" min="1" required autocomplete="off">
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group input-group" ng-class="{'has-error has-feedback': (addIncidentForm.$submitted || addIncidentForm.txtVehicles.$touched) && addIncidentForm.txtVehicles.$invalid }">
+                            <div class="input-group-addon info"><i class="icon icon-default icon-inputgroup"></i> </div>
+                            <input id="txtVehicles" name="txtVehicles" type="number" class="form-control" placeholder="Vehicles" ng-model="vm.incident.vehiclesToAllocate" required max="{{vm.incident.frsToAllocate}}" min="0" autocomplete="off">
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                    </div>-->
+                </div>
+                <p class="text-center text-uppercase" translate>activerecord.errors.models.incident.first_responder_count_must_be_greater_than_or_equal_to_vehicle_count</p>
+                <div class="well well-sm">
+                    <h3 class="text-uppercase text-center" translate>v2.new_incident.select_emergency_type</h3>
+                    <hr />
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                            <span class="input-group-btn input-group-equal">
+                                <select class="form-control emergencyType" id="subcategory" ng-model="vm.incident.subcategory" ng-options="subcategory.name for subcategory in vm.UI.traumaSubcategories">
+                                    <option value="" translate>category.trauma.name</option>
+                                </select>
+                            </span> 
+                            <select class="form-control emergencyType" id="subcategory" ng-model="vm.incident.subcategory" ng-options="subcategory.name for subcategory in vm.UI.medicalSubcategories">
+                                <option value="" translate>category.medical.name</option>
+                            </select>
+                            <span class="input-group-btn input-group-equal">
+                                <select class="form-control emergencyType" id="subcategory" ng-model="vm.incident.subcategory" ng-options="subcategory.name for subcategory in vm.UI.otherSubcategories">
+                                    <option value="" translate>category.other.name</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <!--<div class="text-center row form-inline">
+                        <div class="form-group col-xs-4">
+                            <!--<div class="input-group-addon text-uppercase" translate>category.trauma.name</div>--
+                            <select class="form-control emergencyType" id="subcategory" ng-model="vm.incident.subcategory" ng-options="subcategory.name for subcategory in vm.UI.traumaSubcategories">                              
+                                <option value="" translate>category.trauma.name</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-4">
+                            <!--<div class="input-group-addon text-uppercase" translate>category.medical.name</div>--
+                            <select class="form-control emergencyType" id="subcategory" ng-model="vm.incident.subcategory" ng-options="subcategory.name for subcategory in vm.UI.medicalSubcategories">
+                                <option value="" translate>category.medical.name</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-4">
+                            <!--<div class="input-group-addon text-uppercase" translate>category.other.name</div>--
+                            <select class="form-control emergencyType" id="subcategory" ng-model="vm.incident.subcategory" ng-options="subcategory.name for subcategory in vm.UI.otherSubcategories">
+                                <option value="" translate>category.other.name</option>
+                            </select>
+                        </div>
+                    </div>-->
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-12 form-actions">
+                        <button id="btnIncCreate" type="submit" class="btn btn-primary btn-fullradius" formnovalidate ng-click="vm.saveIncident(addIncidentForm)"><span translate>v2.new_incident.create</span> <img src="../../../images/ic_play_arrow_white_24px.svg" /></button>
+                    </div>
+                    
+                </div>
+
+            </form>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+</div>
+
